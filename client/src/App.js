@@ -3,6 +3,7 @@
 import './App.css';
 
 import Signup from './Signup';
+import Login from './Login';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <ul> {userList} </ul> */}
 
       <Signup />
+      <Login />
     </div>
   );
 }

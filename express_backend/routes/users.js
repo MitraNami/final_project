@@ -6,7 +6,8 @@ module.exports = ({
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts
+    getUsersPosts,
+    bcrypt
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -55,7 +56,36 @@ module.exports = ({
                 error: err.message
             }));
 
-    })
+    });
+
+    router.post('/login', (req, res) => {
+
+        const {email, password} = req.body;
+
+        getUserByEmail(email)
+            .then(user => {
+                if (user) {
+                    //check password
+                   bcrypt.compare(password, user.password)
+                    .then(authenticated =>{
+                        if (authenticated) {
+                            res.json({msg: 'log them in'})
+                        } else {
+                            res.json({msg: "wrong passwrord"})
+                        }
+                    })
+                    
+                } else {
+                    res.json({msg: 'Sorry, email does not exist'})
+                }
+            })
+            .catch(err => res.json({
+                error: err.message
+            }));
+
+    });
+
+
 
     return router;
 };

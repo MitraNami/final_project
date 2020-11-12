@@ -57,6 +57,7 @@ module.exports = (db, bcrypt) => {
       getUsers,
       getUserByEmail,
       addUser,
-      getUsersPosts
+      getUsersPosts,
+      bcrypt
   };
 };
