@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getPostsByUsers } = require('../helpers/dataHelpers');
+const jwt = require('jsonwebtoken');
 
 module.exports = ({
     getUsers,
@@ -69,7 +70,9 @@ module.exports = ({
                    bcrypt.compare(password, user.password)
                     .then(authenticated =>{
                         if (authenticated) {
-                            res.json({msg: 'log them in'})
+                            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+                            res.json({accessToken});
+
                         } else {
                             res.json({msg: "wrong passwrord"})
                         }
@@ -81,7 +84,7 @@ module.exports = ({
             })
             .catch(err => res.json({
                 error: err.message
-            }));
+            })); 
 
     });
 

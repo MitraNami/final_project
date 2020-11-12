@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
-const Login = () => {
+const Login = (props) => {
 
   const [state, setState] = useState({
     email: '',
@@ -17,8 +17,18 @@ const Login = () => {
       email: state.email,
       password: state.password
     })
-      .then(result => console.log(result))
-  };
+      .then(result => {
+      if(!result.data.msg) {
+        //successful login, result.data obj contains accessToken
+        console.log(result.data)
+        props.dispatch({type: "SET_ATHURIZATION", isAuth: true})
+        localStorage.setItem('token', result.data.accessToken)
+      } else {
+        console.log("wrong email or pass")
+      }
+      
+      }) 
+    };
 
   const handleChange = (evt) => {
     setState({...state, [evt.target.name] : evt.target.value});

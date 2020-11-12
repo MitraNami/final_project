@@ -1,7 +1,15 @@
 
 import {Link} from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+  const isAuth = props.state.isAuth;
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    props.dispatch({type: "SET_ATHURIZATION", isAuth: false});
+  };
+
   return (
     <nav>
 
@@ -9,8 +17,14 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/courses">Courses</Link></li>
         <li><Link to="/cotact">Contact Us</Link></li>
+        {!isAuth && <>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
+        </>}
+        {isAuth && <>
+        <li><Link to="/account">My Account</Link></li>
+        <li><span onClick={handleLogout}>Logout</span></li>
+        </>}
       </ul>
 
     </nav>
