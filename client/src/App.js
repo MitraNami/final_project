@@ -1,7 +1,8 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import useApplicationData from './hooks/useApplicationData';
 import './App.css';
 
+import Navbar from './NavBar';
 import Signup from './Signup';
 import Login from './Login';
 
@@ -16,9 +17,17 @@ function App() {
     <div className="App">
       {/* <h1> Users </h1>
       <ul> {userList} </ul> */}
-
-      <Signup />
-      <Login />
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <Signup />    
+        </Route>
+      </Switch>
+    </Router>
     </div>
   );
 }
