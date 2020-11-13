@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { getPostsByUsers } = require('../helpers/dataHelpers');
+const jwt = require('jsonwebtoken');
 
 module.exports = ({
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts
+    getUsersPosts,
+    bcrypt
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -35,7 +37,8 @@ module.exports = ({
             first_name,
             last_name,
             email,
-            password
+            password,
+            type
         } = req.body;
 
         getUserByEmail(email)
@@ -46,16 +49,51 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password)
+                    addUser(first_name, last_name, email, password, type)
+                    .then(newUser => res.json(newUser))
+                    .catch(err => console.log(`Error: ${err.message}`))
                 }
 
             })
-            .then(newUser => res.json(newUser))
+            // .then(newUser => {
+            //     console.log(newUser)
+            //     res.json(newUser)
+            // })
+            // .catch(err => res.json({
+            //     error: err.message
+            // }));
+
+    });
+
+    router.post('/login', (req, res) => {
+
+        const {email, password} = req.body;
+        getUserByEmail(email)
+            .then(user => {
+                if (user) {
+                    //check password
+                   bcrypt.compare(password, user.password)
+                    .then(authenticated =>{
+                        if (authenticated) {
+                            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+                            res.json({accessToken, userType: user.type, userId: user.id, email:user.email});
+
+                        } else {
+                            res.json({msg: "wrong passwrord"})
+                        }
+                    })
+                    
+                } else {
+                    res.json({msg: 'Sorry, email does not exist'})
+                }
+            })
             .catch(err => res.json({
                 error: err.message
-            }));
+            })); 
 
-    })
+    });
+
+
 
     return router;
 };

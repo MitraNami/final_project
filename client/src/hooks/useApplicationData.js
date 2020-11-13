@@ -4,13 +4,15 @@ import axios from 'axios';
 
 
 const useApplicationData = () => {
-    const [state, dispatch] = useReducer(dataReducer, {
-        users: [],
-        courses: [],
-        loading: true,
-        addingCourse: false
-    });
+  const [state, dispatch] = useReducer(dataReducer, {
+      users: [],
+      courses: [],
+      loading: true,
+      addingCourse: false,
+      token: JSON.parse(localStorage.getItem('token'))
+  });
 
+  
     useEffect(() => {
         Promise.all([
             axios.get("/api/users"),

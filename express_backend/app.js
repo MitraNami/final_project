@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bcrypt = require('bcrypt');
 
 const db = require('./db');
-const dbHelpers = require('./models/index')(db);
+const dbHelpers = require('./models/index')(db, bcrypt);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
