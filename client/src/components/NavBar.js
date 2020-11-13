@@ -1,13 +1,16 @@
 
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 const Navbar = (props) => {
+
+  const history = useHistory();
 
   const isAuth = props.state.token;
   const type = isAuth && props.state.token.userType;
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    history.push('/login'); //redirect to the login page 
     props.dispatch({type: "SET_TOKEN", token: null});
   };
 

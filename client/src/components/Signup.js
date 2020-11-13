@@ -13,7 +13,6 @@ const Signup = () => {
 
   const handleSubmission = (evt) => {
     evt.preventDefault();
-    //console.log(state.firstName, state.lastName, state.email, state.password);
 
     axios.post('/api/users', {
       first_name: state.firstName, 

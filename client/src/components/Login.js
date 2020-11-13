@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import { SET_TOKEN } from './reducers/dataReducer';
+import { SET_TOKEN } from '../reducers/dataReducer';
 
 
 const Login = (props) => {
+
+  const history = useHistory();
 
   const [state, setState] = useState({
     email: '',
@@ -22,6 +25,7 @@ const Login = (props) => {
         //successful login
   
         localStorage.setItem('token', JSON.stringify(result.data));
+        history.push('/'); //redirect to homepage
         props.dispatch({type: SET_TOKEN, token: result.data});
         
       } else {

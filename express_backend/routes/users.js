@@ -55,13 +55,6 @@ module.exports = ({
                 }
 
             })
-            // .then(newUser => {
-            //     console.log(newUser)
-            //     res.json(newUser)
-            // })
-            // .catch(err => res.json({
-            //     error: err.message
-            // }));
 
     });
 
