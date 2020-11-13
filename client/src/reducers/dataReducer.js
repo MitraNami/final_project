@@ -6,13 +6,17 @@ export const SAVE_COURSE = 'SAVE_COURSE';
 
 const dataReducer = (state, action) => {
   switch (action.type) {
-    case SET_USERS: {
+    case SET_USERS:
       return {
         ...state,
         users: action.users,
         loading: false,
-      };
-    }
+
+      }
+
+    case SET_TOKEN:
+      return { ...state, token: action.token }
+
     case SET_COURSES:
       return {
         ...state,
@@ -30,13 +34,11 @@ const dataReducer = (state, action) => {
         courses: state.courses.concat([action.course]),
         addingCourse: false
       };
-    case SET_TOKEN: {
-      return { ...state, token: action.token }
-    }
     default:
       return state;
   }
+}
 
-};
+
 
 export default dataReducer;

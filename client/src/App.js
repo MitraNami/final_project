@@ -14,12 +14,12 @@ function App() {
   // const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
   // ));
 
-
   return (
     <div>
       {/* <h1> Users </h1>
       <ul> {userList} </ul> */}
       <Router>
+        <CourseList courses={state.courses} dispatch={dispatch} adding={state.addingCourse} />
         <CourseList courses={state.courses} dispatch={dispatch} adding={state.addingCourse} />
         <Navbar state={state} dispatch={dispatch} />
         <Switch>
@@ -36,8 +36,8 @@ function App() {
 
       </Router>
     </div>
-      );
-  }
+  );
+}
 
 
 
