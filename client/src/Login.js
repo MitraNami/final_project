@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { SET_TOKEN } from './reducers/dataReducer';
 
 
 const Login = (props) => {
@@ -21,7 +22,7 @@ const Login = (props) => {
         //successful login
   
         localStorage.setItem('token', JSON.stringify(result.data));
-        props.dispatch({type: "SET_TOKEN", token: result.data});
+        props.dispatch({type: SET_TOKEN, token: result.data});
         
       } else {
         console.log("wrong email or pass")

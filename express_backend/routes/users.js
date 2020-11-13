@@ -72,7 +72,7 @@ module.exports = ({
                     .then(authenticated =>{
                         if (authenticated) {
                             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                            res.json({accessToken, userType: user.type});
+                            res.json({accessToken, userType: user.type, userId: user.id, email:user.email});
 
                         } else {
                             res.json({msg: "wrong passwrord"})
