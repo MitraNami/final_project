@@ -25,11 +25,11 @@ const Signup = () => {
         if (result.data.msg === 'Sorry, a user account with this email already exists'){
           console.log('user with this email exists')
         } else {
-          console.log(result)
+          console.log(result.data)
           console.log('login with this info')
         }
       })
-      .catch(/*error didn't go through suscessfully  */)
+      .catch(err => console.log(err))
 
   };
 

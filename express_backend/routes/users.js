@@ -49,21 +49,25 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password, type)
+                    addUser(first_name, last_name, email, password, type)
+                    .then(newUser => res.json(newUser))
+                    .catch(err => console.log(`Error: ${err.message}`))
                 }
 
             })
-            .then(newUser => res.json(newUser))
-            .catch(err => res.json({
-                error: err.message
-            }));
+            // .then(newUser => {
+            //     console.log(newUser)
+            //     res.json(newUser)
+            // })
+            // .catch(err => res.json({
+            //     error: err.message
+            // }));
 
     });
 
     router.post('/login', (req, res) => {
 
         const {email, password} = req.body;
-
         getUserByEmail(email)
             .then(user => {
                 if (user) {
