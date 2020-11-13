@@ -7,6 +7,7 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
       users: [],
       loading: true,
+      token: JSON.parse(localStorage.getItem('token'))
   });
   useEffect(() => {
       axios({

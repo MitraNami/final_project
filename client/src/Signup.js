@@ -15,7 +15,7 @@ const Signup = () => {
     evt.preventDefault();
     //console.log(state.firstName, state.lastName, state.email, state.password);
 
-    axios.post('/users', {
+    axios.post('/api/users', {
       first_name: state.firstName, 
       last_name: state.lastName, 
       email: state.email, 
@@ -41,13 +41,13 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={handleSubmission}>
-        <label for="firstName">First Name</label>
+        <label htmlFor="firstName">First Name</label>
         <input type="text" name="firstName" id="firstName" value={state.firstName} onChange={handleChange}/>
-        <label for="lastName">Last Name</label>
+        <label htmlFor="lastName">Last Name</label>
         <input type="text" name="lastName" id="lastName" value={state.lastName} onChange={handleChange}/>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" name="email" id="email" value={state.email} onChange={handleChange}/>
-        <label for="psssword">Password</label>
+        <label htmlFor="psssword">Password</label>
         <input type="password" name="password" id="password" value={state.password} onChange={handleChange}/>
         <button type="submit">Signup</button>
       </form>

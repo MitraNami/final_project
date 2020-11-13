@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 const Navbar = (props) => {
 
   const isAuth = props.state.token;
+  const type = isAuth && props.state.token.userType;
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -22,7 +23,7 @@ const Navbar = (props) => {
         <li><Link to="/signup">Signup</Link></li>
         </>}
         {isAuth && <>
-        <li><Link to="/account">My Account</Link></li>
+        {type === 'client' ? <li><Link to="/users/account">My Account</Link></li> : <li><Link to="/admin/account">Admin Account</Link></li>}
         <li><span onClick={handleLogout}>Logout</span></li>
         </>}
       </ul>

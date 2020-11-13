@@ -11,9 +11,8 @@ const Login = (props) => {
 
   const handleSubmission = (evt) => {
     evt.preventDefault();
-    //console.log(state.email, state.password);
 
-    axios.post('/users/login', {
+    axios.post('/api/users/login', {
       email: state.email,
       password: state.password
     })
@@ -38,9 +37,9 @@ const Login = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmission}>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" name="email" id="email" value={state.email} onChange={handleChange}/>
-        <label for="psssword">Password</label>
+        <label htmlFor="psssword">Password</label>
         <input type="password" name="password" id="password" value={state.password} onChange={handleChange}/>
         <button type="submit">Login</button>
       </form>
@@ -50,4 +49,4 @@ const Login = (props) => {
 }
 
 
-export default Login
+export default Login;
