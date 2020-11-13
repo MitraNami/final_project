@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 
 const Navbar = (props) => {
 
-  const isAuth = props.state.isAuth;
+  const isAuth = props.state.token;
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    props.dispatch({type: "SET_ATHURIZATION", isAuth: false});
+    props.dispatch({type: "SET_TOKEN", token: null});
   };
 
   return (

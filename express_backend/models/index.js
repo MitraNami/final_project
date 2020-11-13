@@ -23,13 +23,13 @@ module.exports = (db, bcrypt) => {
           .catch((err) => err);
   }
 
-  const addUser = (firstName, lastName, email, password) => {
+  const addUser = (firstName, lastName, email, password, type) => {
       //hash the password before storing them in database
       bcrypt.hash(password, 10)
         .then(hash => {
             const query = {
-                text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *` ,
-                values: [firstName, lastName, email, hash]
+                text: `INSERT INTO users (first_name, last_name, email, password, type) VALUES ($1, $2, $3, $4, $5) RETURNING *` ,
+                values: [firstName, lastName, email, hash, type]
             }
       
             return db.query(query)

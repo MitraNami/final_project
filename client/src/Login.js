@@ -18,11 +18,12 @@ const Login = (props) => {
       password: state.password
     })
       .then(result => {
-      if(!result.data.msg) {
-        //successful login, result.data obj contains accessToken
-        console.log(result.data)
-        props.dispatch({type: "SET_ATHURIZATION", isAuth: true})
-        localStorage.setItem('token', result.data.accessToken)
+      if(result.data.accessToken) {
+        //successful login
+  
+        localStorage.setItem('token', JSON.stringify(result.data));
+        props.dispatch({type: "SET_TOKEN", token: result.data});
+        
       } else {
         console.log("wrong email or pass")
       }

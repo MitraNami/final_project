@@ -37,7 +37,8 @@ module.exports = ({
             first_name,
             last_name,
             email,
-            password
+            password,
+            type
         } = req.body;
 
         getUserByEmail(email)
@@ -48,7 +49,7 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password)
+                    return addUser(first_name, last_name, email, password, type)
                 }
 
             })
@@ -71,7 +72,7 @@ module.exports = ({
                     .then(authenticated =>{
                         if (authenticated) {
                             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                            res.json({accessToken});
+                            res.json({accessToken, userType: user.type});
 
                         } else {
                             res.json({msg: "wrong passwrord"})

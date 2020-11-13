@@ -19,12 +19,13 @@ const Signup = () => {
       first_name: state.firstName, 
       last_name: state.lastName, 
       email: state.email, 
-      password: state.password})
+      password: state.password,
+      type: 'client'})
       .then(result => {
         if (result.data.msg === 'Sorry, a user account with this email already exists'){
           console.log('user with this email exists')
         } else {
-          console.log(result.config.data)
+          console.log(result)
           console.log('login with this info')
         }
       })

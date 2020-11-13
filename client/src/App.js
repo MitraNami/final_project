@@ -2,20 +2,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import useApplicationData from './hooks/useApplicationData';
 
 
-import {useReducer, useEffect} from 'react';
+import {useReducer} from 'react';
 import Navbar from './NavBar';
 import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
 
 
-const SET_ATHURIZATION = "SET_ATHURIZATION";
+const SET_TOKEN = "SET_TOKEN";
 
 const reducer = (state, action) => {
   switch(action.type) {
-    case SET_ATHURIZATION: {
-      const {isAuth} = action;
-      return {...state, isAuth};
+
+    case SET_TOKEN: {
+      const {token} = action;
+      return {...state, token};
     }
     default: 
       return state;
@@ -28,16 +29,10 @@ function App() {
   // const {state, dispatch} = useApplicationData();
   // const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
   // ));
+ 
   const [state, dispatch] = useReducer(reducer, {
-    isAuth: false
+    token: JSON.parse(localStorage.getItem('token'))
   });
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      dispatch({type: SET_ATHURIZATION, isAuth: true})
-    } 
-  } , []);
 
 
   return (
