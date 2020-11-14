@@ -1,3 +1,5 @@
+
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import useApplicationData from './hooks/useApplicationData';
 import CourseList from './components/CourseList';
@@ -14,8 +16,8 @@ function App() {
 
   return (
     <div>
+      {/*<CourseList courses={state.courses} dispatch={dispatch} adding={state.addingCourse} />*/}
       <Router>
-        <CourseList courses={state.courses} dispatch={dispatch} adding={state.addingCourse} />
         <Navbar state={state} dispatch={dispatch} />
         <Switch>
           <Route exact path='/'>
