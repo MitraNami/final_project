@@ -3,11 +3,12 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import useApplicationData from './hooks/useApplicationData';
 
-import AdminCourse from './components/AdminCourse';
+import CourseAdmin from './components/CourseAdmin';
 import Navbar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from './components/Home';
+import Courses from './components/Courses';
 
 
 function App() {
@@ -29,7 +30,10 @@ function App() {
             <Signup />
           </Route>
           <Route path='/admin/account'>
-            <AdminCourse state={state} dispatch={dispatch} />
+            <CourseAdmin state={state} dispatch={dispatch} />
+          </Route>
+          <Route path='/courses'>
+            <Courses state={state} dispatch={dispatch} />
           </Route>
         </Switch>
 
