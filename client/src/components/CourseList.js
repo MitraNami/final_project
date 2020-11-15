@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { ADD_COURSE } from "../reducers/dataReducer";
 import Course from "../components/Course";
 import NewCourse from "./NewCourse";
 
 export default function CourseList(props) {
 
-  const courseList = props.courses.map(course =>
+  const courseList = props.courses && props.courses.map(course =>
     <Course
       key={course.id}
       title={course.title}

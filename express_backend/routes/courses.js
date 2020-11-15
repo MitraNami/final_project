@@ -18,9 +18,11 @@ module.exports = ({
             title,
             content,
             subscription_based,
+            price,
+            authorized
         } = req.body;
 
-        addCourse(course.title, course.content, course.subscription_based)
+        addCourse(course.title, course.content, course.subscription_based, course.price, course.authorized)
             .then(newCourse => res.json(newCourse))
             .catch(err => res.json({
                 error: err.message
