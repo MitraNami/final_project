@@ -10,6 +10,7 @@ const MyAccount = () => {
       <aside>
         <ul>
           <li>Edit profile</li>
+          <li>Manage Subscription</li>
           <li>My invoices</li>
           <li>Enrolled courses</li>
         </ul>
