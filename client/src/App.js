@@ -28,7 +28,7 @@ function App() {
             <Courses courses={state.courses} />
           </Route>
           <Route exact path='/courses/:courseId/home'>
-            <CourseHomePage token={state.token}/>
+            <CourseHomePage state={state}/>
           </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />

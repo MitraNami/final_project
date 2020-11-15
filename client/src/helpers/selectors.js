@@ -9,7 +9,12 @@ const isRegisteredForACourse = (userId, courseId, registraions) => {
   return false;
 };
 
+//return the course object with the given id
+const getCourseById = (courseId, courses) => {
+  //courseId is a string
+  return courses.find(course => course.id === Number(courseId));
+};
 
 
 
-export {isRegisteredForACourse};
+export {isRegisteredForACourse, getCourseById};
