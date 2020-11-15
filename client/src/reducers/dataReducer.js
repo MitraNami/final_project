@@ -23,11 +23,6 @@ const dataReducer = (state, action) => {
         courses: action.courses,
         loading: false,
       };
-    case ADD_COURSE:
-      return {
-        ...state,
-        addingCourse: true
-      };
     case SAVE_COURSE:
       return {
         ...state,
