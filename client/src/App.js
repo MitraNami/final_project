@@ -2,8 +2,8 @@
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import useApplicationData from './hooks/useApplicationData';
-import CourseList from './components/CourseList';
 
+import AdminCourse from './components/AdminCourse';
 import Navbar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -16,7 +16,6 @@ function App() {
 
   return (
     <div>
-      {/*<CourseList courses={state.courses} dispatch={dispatch} adding={state.addingCourse} />*/}
       <Router>
         <Navbar state={state} dispatch={dispatch} />
         <Switch>
@@ -29,13 +28,14 @@ function App() {
           <Route path='/signup'>
             <Signup />
           </Route>
+          <Route path='/admin/account'>
+            <AdminCourse state={state} dispatch={dispatch} />
+          </Route>
         </Switch>
 
       </Router>
     </div>
   );
 }
-
-
 
 export default App;

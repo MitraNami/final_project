@@ -26,27 +26,24 @@ module.exports = (db, bcrypt) => {
     const addUser = (firstName, lastName, email, password, type) => {
         //hash the password before storing them in database
         return bcrypt.hash(password, 10)
-          .then(hash => {
-              const query = {
-                  text: `INSERT INTO users (first_name, last_name, email, password, type) VALUES ($1, $2, $3, $4, $5) RETURNING *` ,
-                  values: [firstName, lastName, email, hash, type]
-              }
-        
-              return db.query(query)
-                .then(result => result.rows[0])
-                .catch(err => console.log(err.message));
+            .then(hash => {
+                const query = {
+                    text: `INSERT INTO users (first_name, last_name, email, password, type) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+                    values: [firstName, lastName, email, hash, type]
+                }
 
-    
-          })
-       
-      }
+                return db.query(query)
+                    .then(result => result.rows[0])
+                    .catch(err => console.log(err.message));
+            });
+    }
 
     const getUsersPosts = () => {
         const query = {
             text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-      FROM users
-      INNER JOIN posts
-      ON users.id = posts.user_id`
+                   FROM users
+                   INNER JOIN posts
+                   ON users.id = posts.user_id`
         }
 
         return db.query(query)
@@ -63,13 +60,13 @@ module.exports = (db, bcrypt) => {
         return db
             .query(query)
             .then((result) => result.rows)
-            .catch((err) => err);
+            .catch(err => err);
     };
 
-    const addCourse = (title, content, subscription_based) => {
+    const addCourse = (title, content, subscription_based, price, authorized) => {
         const query = {
-            text: `INSERT INTO courses (title, content, subscription_based) VALUES ($1, $2, $3) RETURNING *`,
-            values: [title, content, subscription_based]
+            text: `INSERT INTO courses (title, content, subscription_based, price, authorized) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            values: [title, content, subscription_based, price, authorized]
         }
 
         return db.query(query)
