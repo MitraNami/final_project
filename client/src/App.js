@@ -8,6 +8,8 @@ import Navbar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from './components/Home';
+import Courses from './components/Courses';
+import CourseContent from './components/CourseContent'
 
 
 function App() {
@@ -21,6 +23,12 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home />
+          </Route>
+          <Route exact path='/courses'>
+            <Courses courses={state.courses} />
+          </Route>
+          <Route exact path='/courses/:courseId/home'>
+            <CourseContent token={state.token}/>
           </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />
