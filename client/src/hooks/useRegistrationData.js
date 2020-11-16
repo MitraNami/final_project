@@ -5,9 +5,11 @@ const useRegistrationData = () => {
   const [state, setState] = useState({
     registrations: [],
     modalShow: false,
+    redirectToContent: false,
   });
 
   const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
+  const setRedirectToContent = (redirect) => setState(prev => ({...prev, redirectToContent: redirect}));
 
   useEffect(() => {
       axios.get('/api/users/registrations')
@@ -35,12 +37,15 @@ const useRegistrationData = () => {
 
   const registrations = state.registrations;
   const modalShow = state.modalShow;
+  const redirectToContent = state.redirectToContent;
 
   return {
     registrations,
     registerUser,
     modalShow,
-    setModalShow
+    setModalShow,
+    redirectToContent,
+    setRedirectToContent
   }
 };
 

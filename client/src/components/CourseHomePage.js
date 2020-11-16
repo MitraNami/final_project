@@ -1,4 +1,4 @@
-import {useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory, Redirect} from 'react-router-dom';
 
 import useRegistrationData from 'hooks/useRegistrationData';
 import {isRegisteredForACourse, getCourseById} from '../helpers/selectors';
@@ -9,7 +9,8 @@ const CourseHomePage = (props) => {
   const { courseId } = useParams();
 
   const history = useHistory();
-  const {registrations, registerUser, setModalShow, modalShow} = useRegistrationData();
+  const {registrations, registerUser, setModalShow, modalShow,
+    redirectToContent, setRedirectToContent} = useRegistrationData();
 
   //if the user is not logged(id null) or not registered in the course, is Registered will be false
   //if the user is logged in and registered it would be true
@@ -18,18 +19,18 @@ const CourseHomePage = (props) => {
 
   const handleClick = () => {
     if (props.state.token) {
-      //the user is logged in, so we need to see if they are registered in this course
-    
+      //the user is logged in and not registered to the course
       //you need to register them in the course, there are three possibilities
       const course = getCourseById(courseId, props.state.courses);
       console.log(course);
 
       if (course.authorized === true && course.price === 0) {
-        console.log('just register them')
+        //register the user, and on successful registration to the database
+        //take them to the content page of the course
 
         registerUser(props.state.token.userId, courseId)
-          .then(() => console.log('take them to the content page'))
-          .catch(error => console.log('didn not registered successfully'))
+          .then(() => setRedirectToContent(true))
+          .catch(error => console.log(error, 'didn not registered successfully'))
 
 
         
@@ -44,19 +45,24 @@ const CourseHomePage = (props) => {
 
     } else {
       //the user is not logged in, show them signup/login modal
+      console.log('not logged in');
       setModalShow(true);
-      //history.push('/login')
-      console.log('not logged in')
+      
     }
 
   };
+
+  const handleContentRender = () => {
+    setRedirectToContent(true);
+  }
 
   return(
     <div>
       Home page of course with Id: {courseId}
       {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
-      {isRegistered && <button type="submit" className="btn btn-primary" onClick={() => console.log('taken to the content page')}>Continue the Course!</button>}
+      {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
       {modalShow && <SignupLoginModal />}
+      {redirectToContent && <Redirect push to={`/courses/${courseId}/content`} />}
     </div>
   )
 };

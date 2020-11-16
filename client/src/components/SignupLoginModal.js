@@ -15,8 +15,9 @@ const SignupLoginModal = () => {
   return (
     <div className="overlay">
       <div className="content">
-        modal contents
+        <h4>You need to login or signup first:</h4>
         <button type="submit" onClick={handleLogin}>Login</button>
+        <br />
         <button type="submit" onClick={handleSignup}>Signup</button>
       </div>
     </div>
