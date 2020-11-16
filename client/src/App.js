@@ -8,7 +8,9 @@ import Navbar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from './components/Home';
-import Courses from './components/Courses';
+import CoursesPage from './components/CoursesPage';
+import CourseHomePage from './components/CourseHomePage';
+//import Courses from './components/Courses'; //we both did /courses route
 
 
 function App() {
@@ -23,6 +25,12 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
+          <Route exact path='/courses'>
+            <CoursesPage courses={state.courses} />
+          </Route>
+          <Route exact path='/courses/:courseId/home'>
+            <CourseHomePage state={state}/>
+          </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />
           </Route>
@@ -32,9 +40,9 @@ function App() {
           <Route path='/admin/account'>
             <CourseAdmin state={state} dispatch={dispatch} />
           </Route>
-          <Route path='/courses'>
+          {/* <Route path='/courses'>
             <Courses state={state} dispatch={dispatch} />
-          </Route>
+          </Route> */}
         </Switch>
 
       </Router>
