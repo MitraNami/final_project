@@ -7,7 +7,7 @@ const useRegistrationData = () => {
   useEffect(() => {
       axios.get('/api/users/registrations')
         .then(result  => {
-          setRegistrations(prev => [...result.data]);
+          setRegistrations(prev => result.data);
     })
   }, []);
 
@@ -16,7 +16,16 @@ const useRegistrationData = () => {
 // it will send a register request to the database
 //for a given user and course
   const registerUser = (userId, courseId) => {
-
+    return axios.post('/api/users/registrations', {
+      start_date: new Date(),
+      user_id: userId,
+      course_id: courseId
+    })
+    .then((newRegistration) => {
+      //successful registraiton update the state registrations
+      console.log(newRegistration)
+      setRegistrations(prev => [...prev, newRegistration])
+    })
   };
 
 

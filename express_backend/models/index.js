@@ -83,7 +83,18 @@ module.exports = (db, bcrypt) => {
       .query(query)
       .then((result) => result.rows)
       .catch((err) => err);
-  }
+  };
+
+  const addRegistration = (user_id, course_id, start_date) => {
+    const query = {
+      text: `INSERT INTO registrations (start_date, user_id, course_id) VALUES ($1, $2, $3) RETURNING *`,
+      values: [start_date, user_id, course_id]
+    };
+    return db
+      .query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
 
   return {
     getUsers,
@@ -93,6 +104,7 @@ module.exports = (db, bcrypt) => {
     getCourses,
     addCourse,
     getRegistrations,
+    addRegistration,
     bcrypt
   };
 };

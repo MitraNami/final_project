@@ -9,6 +9,7 @@ module.exports = ({
   addUser,
   getUsersPosts,
   getRegistrations,
+  addRegistration,
   bcrypt
 }) => {
   /* GET users listing. */
@@ -103,6 +104,10 @@ module.exports = ({
   });
 
   router.post('/registrations', (req, res) => {
+    const {start_date, user_id, course_id} = req.body;
+    addRegistration(user_id, course_id, start_date)
+      .then(newRegistration => res.json(newRegistration))
+      .catch(err => console.log(`Error: ${err.message}`))
 
   });
 
