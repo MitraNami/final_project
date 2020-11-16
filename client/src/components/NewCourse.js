@@ -14,68 +14,81 @@ export default function NewCourse(props) {
 
   return (
     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-      <div className="form-group">
-        <label>
+      <div className="form-group row">
+        <label htmlFor="inputName" className="col-sm-2 col-form-label">
           Course name:
         </label>
-        <input
-          name="title"
-          type="text"
-          placeholder="Enter Name"
-          onChange={handleInputChange}
-        />
+        <div className="col-sm-10">
+          <input
+            name="title"
+            type="text"
+            placeholder="Enter Name"
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
 
-      <div className="form-group">
-        <label>
+      <div className="form-group row">
+        <label htmlFor="inputName" className="col-sm-2 col-form-label">
           Content:
         </label>
-        <input
-          name="content"
-          type="text"
-          placeholder="Enter Content"
-          onChange={handleInputChange}
-        />
+        <div className="col-sm-10">
+          <input
+            name="content"
+            type="text"
+            placeholder="Enter Content"
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
-      <div className="form-group">
-        <label>
+
+      <div className="form-group row">
+        <label htmlFor="inputName" className="col-sm-2 col-form-label">
           Price:
         </label>
-        <input
-          name="price"
-          type="text"
-          placeholder="Enter Price"
-          onChange={handleInputChange}
-        />
+        <div className="col-sm-10">
+          <input
+            name="price"
+            type="text"
+            placeholder="Enter Price"
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
 
-
-      <div className="form-group">
-        <label>
-          Subscription:
-        </label>
-        <input
-          name="subscription_based"
-          type="checkbox"
-          onChange={handleInputChange}
-        />
+      <div className="form-group row">
+        <div className="col-sm-10">
+          <div className="form-check">
+            <input className="form-check-input"
+              name="subscription_based"
+              type="checkbox"
+              onChange={handleInputChange}
+              id="defaultCheck1"
+            />
+            <label className="form-check-label" htmlFor="defaultCheck1">
+              Subscription
+            </label>
+          </div>
+        </div>
+        
+        <div className="col-sm-10">
+          <div className="form-check">
+            <input className="form-check-input"
+              name="authorized"
+              type="checkbox"
+              onChange={handleInputChange}
+              id="defaultCheck2"
+            />
+            <label className="form-check-label" htmlFor="defaultCheck2">
+              Authorized
+            </label>
+          </div>
+        </div>
       </div>
-      <div className="form-group">
-        <label>
-          Authorized:
-        </label>
-        <input
-          name="authorized"
-          type="checkbox"
-          onChange={handleInputChange}
-        />
-      </div>
 
-
-
-
-      { !saving && (<button onClick={save}>Save</button>)}
-      { saving && (<span>Saving...</span>)}
+      {!saving && (<button className="btn btn-primary" type="submit" onClick={save}>Save</button>)}
+      {!saving && (<button className="btn btn-primary" type="button" onClick={cancel}>Cancel</button>)}
+      {saving && (<span>Saving...</span>)}
     </form>
   );
 
@@ -89,6 +102,10 @@ export default function NewCourse(props) {
     });
   }
 
+  function cancel() {
+    props.onClose();
+  }
+
   function save() {
     // TODO: validate form data
 
@@ -97,6 +114,7 @@ export default function NewCourse(props) {
       .then(res => {
         props.dispatch({ type: SAVE_COURSE, course: res.data });
         setSaving(false);
+        props.onClose();
       });
   }
 }

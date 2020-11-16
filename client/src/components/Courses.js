@@ -1,30 +1,16 @@
+import React from "react";
+import CourseList from './CourseList';
 
-import Course from './Course';
-import { Link, useRouteMatch} from 'react-router-dom';
-
-
-const Courses = (props) => {
-
-  const { path, url } = useRouteMatch();
-
-  const courses = props.courses.map(course => {
-    return (
-      <Link key={course.id} to={`${url}/${course.id}/home`}>
-        <Course
-          title={course.title}
-          description={course.description}
-          subscription_based={course.subscription_based} />
-      </Link>
-    );
-  });
+export default function CourseAdmin(props) {
 
   return (
-    <div>
-      <h2>Available Courses</h2>
-      {courses}
-    </div>
+    <section className="courseAdmin">
+      <div className="container">
+        <div className="row">
+          <h1>Courses</h1>
+        </div>
+        <CourseList courses={props.state.courses} dispatch={props.dispatch}/>
+      </div>
+    </section >
   );
-
 };
-
-export default Courses;
