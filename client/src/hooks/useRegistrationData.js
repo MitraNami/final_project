@@ -2,12 +2,17 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 const useRegistrationData = () => {
-  const [registrations, setRegistrations] = useState([]);
+  const [state, setState] = useState({
+    registrations: [],
+    modalShow: false,
+  });
+
+  const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
 
   useEffect(() => {
       axios.get('/api/users/registrations')
         .then(result  => {
-          setRegistrations(prev => result.data);
+          setState(prev => ({...prev, registrations: result.data}));
     })
   }, []);
 
@@ -23,14 +28,19 @@ const useRegistrationData = () => {
     })
     .then(result => {
       //successful registraiton update the state registrations
-      setRegistrations(prev => ([...prev, result.data]));
+      const newRegistration = result.data;
+      setState(prev => ({...prev, registrations: [...prev.registrations, newRegistration]}));
     })
   };
 
+  const registrations = state.registrations;
+  const modalShow = state.modalShow;
 
   return {
     registrations,
-    registerUser
+    registerUser,
+    modalShow,
+    setModalShow
   }
 };
 

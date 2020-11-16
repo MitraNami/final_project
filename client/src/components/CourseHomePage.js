@@ -3,15 +3,18 @@ import {useParams, useHistory} from 'react-router-dom';
 import useRegistrationData from 'hooks/useRegistrationData';
 import {isRegisteredForACourse, getCourseById} from '../helpers/selectors';
 
+import SignupLoginModal from 'components/SignupLoginModal';
+
 const CourseHomePage = (props) => {
   const { courseId } = useParams();
 
   const history = useHistory();
-  const {registrations, registerUser} = useRegistrationData();
+  const {registrations, registerUser, setModalShow, modalShow} = useRegistrationData();
 
   //if the user is not logged(id null) or not registered in the course, is Registered will be false
   //if the user is logged in and registered it would be true
-  const isRegistered = isRegisteredForACourse(props.state.token ? props.state.token.userId : 0, courseId, registrations);
+  const isRegistered = props.state.token ?
+   isRegisteredForACourse(props.state.token.userId, courseId, registrations) : false;
 
   const handleClick = () => {
     if (props.state.token) {
@@ -41,7 +44,8 @@ const CourseHomePage = (props) => {
 
     } else {
       //the user is not logged in, show them signup/login modal
-      history.push('/login')
+      setModalShow(true);
+      //history.push('/login')
       console.log('not logged in')
     }
 
@@ -52,6 +56,7 @@ const CourseHomePage = (props) => {
       Home page of course with Id: {courseId}
       {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={() => console.log('taken to the content page')}>Continue the Course!</button>}
+      {modalShow && <SignupLoginModal />}
     </div>
   )
 };

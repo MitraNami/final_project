@@ -70,7 +70,7 @@ module.exports = ({
             .then(newUser => {
               //res.json(newUser)
               const accessToken = jwt.sign(newUser, process.env.ACCESS_TOKEN_SECRET);
-              res.json({ accessToken, userType: newUser.type, email: newUser.email });
+              res.json({ accessToken, userType: newUser.type, email: newUser.email, userId: newUser.id });
             })
             .catch(err => console.log(`Error: ${err.message}`))
         }
