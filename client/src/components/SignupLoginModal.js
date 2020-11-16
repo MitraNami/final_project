@@ -1,6 +1,6 @@
 import {useHistory} from 'react-router-dom';
 
-const SignupLoginModal = () => {
+const SignupLoginModal = (props) => {
 
   const history = useHistory();
 
@@ -12,6 +12,11 @@ const SignupLoginModal = () => {
     history.push('/signup');
   };
 
+  const handleCancel = () => {
+    //close the signup/login modal
+    props.cancelModal(false);
+  }
+
   return (
     <div className="overlay">
       <div className="content">
@@ -19,6 +24,8 @@ const SignupLoginModal = () => {
         <button type="submit" onClick={handleLogin}>Login</button>
         <br />
         <button type="submit" onClick={handleSignup}>Signup</button>
+        <br />
+        <button type="submit" onClick={handleCancel}>Cancel</button>
       </div>
     </div>
   );
