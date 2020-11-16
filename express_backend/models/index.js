@@ -92,7 +92,7 @@ module.exports = (db, bcrypt) => {
     };
     return db
       .query(query)
-      .then(result => result.rows)
+      .then(result => result.rows[0])
       .catch(err => err);
   };
 

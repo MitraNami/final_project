@@ -21,10 +21,9 @@ const useRegistrationData = () => {
       user_id: userId,
       course_id: courseId
     })
-    .then((newRegistration) => {
+    .then(result => {
       //successful registraiton update the state registrations
-      console.log(newRegistration)
-      setRegistrations(prev => [...prev, newRegistration])
+      setRegistrations(prev => ([...prev, result.data]));
     })
   };
 
