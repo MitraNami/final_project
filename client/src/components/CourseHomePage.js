@@ -1,10 +1,12 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 
 import useRegistrationData from 'hooks/useRegistrationData';
 import {isRegisteredForACourse, getCourseById} from '../helpers/selectors';
 
 const CourseHomePage = (props) => {
   const { courseId } = useParams();
+
+  const history = useHistory();
   const {registrations, registerUser} = useRegistrationData();
 
   //if the user is not logged(id null) or not registered in the course, is Registered will be false
@@ -39,6 +41,7 @@ const CourseHomePage = (props) => {
 
     } else {
       //the user is not logged in, show them signup/login modal
+      history.push('/login')
       console.log('not logged in')
     }
 

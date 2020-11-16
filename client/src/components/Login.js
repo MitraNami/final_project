@@ -28,7 +28,7 @@ const Login = (props) => {
           //successful login
 
           localStorage.setItem('token', JSON.stringify(result.data));
-          history.push('/'); //redirect to homepage
+          history.goBack(); //redirect to the previous page
           props.dispatch({ type: SET_TOKEN, token: result.data });
 
         } else {

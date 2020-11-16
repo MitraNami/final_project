@@ -35,7 +35,7 @@ function App() {
             <Login dispatch={dispatch} />
           </Route>
           <Route path='/signup'>
-            <Signup />
+            <Signup dispatch={dispatch} />
           </Route>
           <Route path='/admin/account'>
             <CourseAdmin state={state} dispatch={dispatch} />

@@ -10,7 +10,7 @@ const Navbar = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    history.push('/login'); //redirect to the login page 
+    history.push('/'); //redirect to the homepage
     props.dispatch({type: "SET_TOKEN", token: null});
   };
 
