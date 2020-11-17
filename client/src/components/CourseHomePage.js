@@ -20,14 +20,15 @@ const CourseHomePage = (props) => {
   const isRegistered = props.state.token ?
     isRegisteredForACourse(props.state.token.userId, courseId, registrations) : false;
 
+  const course = getCourseById(courseId, props.state.courses);
+  console.log(course);
+
 
   const handleClick = () => {
     if (props.state.token) {
       //the user is logged in and not registered to the course
       //you need to register them in the course, there are three possibilities
-      const course = getCourseById(courseId, props.state.courses);
-      console.log(course);
-
+     
       if (course.authorized === true && course.price === 0) {
         //register the user, and on successful registration to the database
         //take them to the content page of the course
@@ -58,7 +59,7 @@ const CourseHomePage = (props) => {
 
   return (
     <div>
-      Home page of course with Id: {courseId}
+      Home page of course: {course.title} <br /> {course.description}
       {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
       {modalShow && <SignupLoginModal cancelModal={setModalShow} />}
