@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import CoursesPage from './components/CoursesPage';
 import CourseHomePage from './components/CourseHomePage';
+import CoursePage from './components/CoursePage'
 //import Courses from './components/Courses'; //we both did /courses route
 
 
@@ -31,13 +32,16 @@ function App() {
           <Route exact path='/courses/:courseId/home'>
             <CourseHomePage state={state}/>
           </Route>
+          <Route exact path='/courses/:courseId/content'> {/*make it a private route*/}
+            <CoursePage/>
+          </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />
           </Route>
           <Route path='/signup'>
-            <Signup />
+            <Signup dispatch={dispatch} />
           </Route>
-          <Route path='/admin/account'>
+          <Route path='/admin/account'> {/*make it a private route*/}
             <CourseAdmin state={state} dispatch={dispatch} />
           </Route>
           {/* <Route path='/courses'>

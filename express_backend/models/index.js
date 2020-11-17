@@ -28,7 +28,7 @@ module.exports = (db, bcrypt) => {
     return bcrypt.hash(password, 10)
       .then(hash => {
         const query = {
-          text: `INSERT INTO users (first_name, last_name, email, password, type) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+          text: `INSERT INTO users (first_name, last_name, email, password, type) VALUES ($1, $2, $3, $4, $5) RETURNING id, *`,
           values: [firstName, lastName, email, hash, type]
         }
 

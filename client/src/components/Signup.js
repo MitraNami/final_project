@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
+import { SET_TOKEN } from '../reducers/dataReducer';
 
+const Signup = (props) => {
 
-const Signup = () => {
+  const history = useHistory();
 
   const [state, setState] = useState({
     firstName: '',
@@ -29,8 +31,10 @@ const Signup = () => {
           setState(prev => ({ ...prev, error: true, saving: false }));
           //console.log('user with this email exists')
         } else {
-          console.log(result.data)
-          console.log('login with this info')
+          //login with this info'
+          localStorage.setItem('token', JSON.stringify(result.data));
+          history.goBack(); //redirect to the previous page
+          props.dispatch({ type: SET_TOKEN, token: result.data });
         }
       })
       .catch(err => console.log(err))

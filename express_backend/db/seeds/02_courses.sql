@@ -1,5 +1,5 @@
 INSERT INTO
-courses(title, content, subscription_based, price, authorized)
+courses(title, description, subscription_based, price, authorized)
 VALUES
     (
         'Learn more about the StrongerU Senior Fitness Instructor Certification and Series Free',

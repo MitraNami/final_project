@@ -2,12 +2,21 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 const useRegistrationData = () => {
-  const [registrations, setRegistrations] = useState([]);
+  const [state, setState] = useState({
+    registrations: [],
+    modalShow: false,
+    adminModalShow: false,
+    redirectToContent: false,
+  });
+
+  const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
+  const setAdminModalShow = (show) => setState(prev => ({...prev, adminModalShow: show}));
+  const setRedirectToContent = (redirect) => setState(prev => ({...prev, redirectToContent: redirect}));
 
   useEffect(() => {
       axios.get('/api/users/registrations')
         .then(result  => {
-          setRegistrations(prev => result.data);
+          setState(prev => ({...prev, registrations: result.data}));
     })
   }, []);
 
@@ -23,14 +32,25 @@ const useRegistrationData = () => {
     })
     .then(result => {
       //successful registraiton update the state registrations
-      setRegistrations(prev => ([...prev, result.data]));
+      const newRegistration = result.data;
+      setState(prev => ({...prev, registrations: [...prev.registrations, newRegistration]}));
     })
   };
 
+  const registrations = state.registrations;
+  const modalShow = state.modalShow;
+  const adminModalShow = state.adminModalShow;
+  const redirectToContent = state.redirectToContent;
 
   return {
     registrations,
-    registerUser
+    registerUser,
+    modalShow,
+    setModalShow,
+    adminModalShow,
+    setAdminModalShow,
+    redirectToContent,
+    setRedirectToContent
   }
 };
 
