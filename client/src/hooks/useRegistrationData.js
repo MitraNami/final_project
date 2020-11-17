@@ -5,10 +5,12 @@ const useRegistrationData = () => {
   const [state, setState] = useState({
     registrations: [],
     modalShow: false,
+    adminModalShow: false,
     redirectToContent: false,
   });
 
   const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
+  const setAdminModalShow = (show) => setState(prev => ({...prev, adminModalShow: show}));
   const setRedirectToContent = (redirect) => setState(prev => ({...prev, redirectToContent: redirect}));
 
   useEffect(() => {
@@ -37,6 +39,7 @@ const useRegistrationData = () => {
 
   const registrations = state.registrations;
   const modalShow = state.modalShow;
+  const adminModalShow = state.adminModalShow;
   const redirectToContent = state.redirectToContent;
 
   return {
@@ -44,6 +47,8 @@ const useRegistrationData = () => {
     registerUser,
     modalShow,
     setModalShow,
+    adminModalShow,
+    setAdminModalShow,
     redirectToContent,
     setRedirectToContent
   }
