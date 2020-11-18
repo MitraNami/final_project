@@ -16,7 +16,8 @@ const useRegistrationData = () => {
   useEffect(() => {
       axios.get('/api/users/registrations')
         .then(result  => {
-          setState(prev => ({...prev, registrations: result.data}));
+          const registrations = result.data;
+          setState(prev => ({...prev, registrations}));
     })
   }, []);
 
@@ -28,7 +29,7 @@ const useRegistrationData = () => {
     return axios.post('/api/users/registrations', {
       start_date: new Date(),
       user_id: userId,
-      course_id: courseId
+      course_id: Number(courseId)
     })
     .then(result => {
       //successful registraiton update the state registrations

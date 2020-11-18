@@ -33,7 +33,7 @@ function App() {
             <CourseHomePage state={state}/>
           </Route>
           <Route exact path='/courses/:courseId/content'> {/*make it a private route*/}
-            <CoursePage/>
+            <CoursePage state={state}/>
           </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />

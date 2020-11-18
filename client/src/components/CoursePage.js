@@ -1,8 +1,17 @@
 import {useParams} from 'react-router-dom';
 
-const CoursePage = () => {
+import useContentData from 'hooks/useContentData';
+import UserLesson from 'components/UserLesson';
+
+const CoursePage = (props) => {
 
   const { courseId } = useParams();
+
+   //we need to get all the lessons with this course id from the database
+  const {lessons} = useContentData(courseId);
+  
+  
+ 
 
     //you needd to go to the lessons table and get all the lessons
     //for this course id; then show them all. if the course is
@@ -12,6 +21,10 @@ const CoursePage = () => {
   return (
     <div>
       Content of course with id: {courseId}
+
+      <UserLesson />
+
+
     </div>
   );
 };
