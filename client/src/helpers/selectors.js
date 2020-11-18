@@ -17,4 +17,8 @@ const getCourseById = (courseId, courses) => {
 
 
 
-export {isRegisteredForACourse, getCourseById};
+
+export {
+  isRegisteredForACourse,
+  getCourseById,
+};

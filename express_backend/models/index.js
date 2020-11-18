@@ -21,7 +21,7 @@ module.exports = (db, bcrypt) => {
       .query(query)
       .then(result => result.rows[0])
       .catch((err) => err);
-  }
+  };
 
   const addUser = (firstName, lastName, email, password, type) => {
     //hash the password before storing them in database
@@ -111,6 +111,18 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const getLessonsByCourseId = courseId => {
+    const query = {
+      text: `SELECT * FROM lessons WHERE course_id = $1`,
+      values: [courseId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -121,6 +133,7 @@ module.exports = (db, bcrypt) => {
     editCourse,
     getRegistrations,
     addRegistration,
+    getLessonsByCourseId,
     bcrypt
   };
 };

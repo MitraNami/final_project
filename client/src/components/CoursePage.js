@@ -1,8 +1,23 @@
 import {useParams} from 'react-router-dom';
 
-const CoursePage = () => {
+import useContentData from 'hooks/useContentData';
+import UserLesson from 'components/UserLesson';
+import { getCourseById } from '../helpers/selectors';
+
+const CoursePage = (props) => {
 
   const { courseId } = useParams();
+
+  const course = getCourseById(courseId, props.state.courses);
+  const subscriptionBased = course.subscription_based;
+  console.log(subscriptionBased)
+
+   //we need to get all the lessons with this course id from the database
+  const {lessons} = useContentData(courseId);
+  console.log(lessons);
+
+  
+ 
 
     //you needd to go to the lessons table and get all the lessons
     //for this course id; then show them all. if the course is
@@ -12,6 +27,11 @@ const CoursePage = () => {
   return (
     <div>
       Content of course with id: {courseId}
+
+      <UserLesson />
+      
+
+
     </div>
   );
 };
