@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-
 const useContentData = (courseId) => {
 
   const [state, setState] = useState({
@@ -11,15 +10,14 @@ const useContentData = (courseId) => {
   });
 
   useEffect(() => {
-    axios.get(`/api/lessons/course/${courseId}`)
+    courseId && axios.get(`/api/lessons/course/${courseId}`)
       .then((result) => {
         const lessons = result.data;
-        setState(prev => ({...prev, lessons}));
+        setState(prev => ({ ...prev, lessons }));
       })
   }, []);
 
-
-const lessons = state.lessons;
+  const lessons = state.lessons;
 
   return {
     lessons

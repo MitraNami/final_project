@@ -90,6 +90,17 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const deleteCourse = (id) => {
+    const query = {
+      text: `DELETE FROM courses WHERE id = $1`,
+      values: [id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   const getRegistrations = () => {
     const query = {
       text: 'SELECT * FROM registrations'
@@ -131,6 +142,7 @@ module.exports = (db, bcrypt) => {
     getCourses,
     addCourse,
     editCourse,
+    deleteCourse,
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,

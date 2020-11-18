@@ -1,6 +1,7 @@
+import axios from "axios";
 import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
-import deleteCourse from '../hooks/useApplicationData';
+import { DELETE_COURSE } from '../reducers/dataReducer';
 
 export default function Course(props) {
 
@@ -17,6 +18,7 @@ export default function Course(props) {
   );
 
   function delCourse() {
-    // deleteCourse(props.id);
+    return axios.delete(`/api/courses/${props.id}`)
+      .then(() => props.dispatch({ type: DELETE_COURSE, id: props.id }));
   }
 }

@@ -140,7 +140,6 @@ export default function CourseEdit(props) {
   }
 
   function save() {
-    console.log(course);
     // TODO: validate form data
 
     setSaving(true);

@@ -21,19 +21,9 @@ const useApplicationData = () => {
         });
     }, []);
 
-    function deleteCourse(id) {
-        const course = {
-            ...state.courses[id]
-        };
-
-        return axios.delete(`/admin/account/courses/${id}`)
-            .then(() => dispatch({ ...state, course }));
-    }
-
     return {
         state,
-        dispatch,
-        deleteCourse
+        dispatch
     };
 };
 

@@ -3,6 +3,7 @@ export const SET_TOKEN = "SET_TOKEN";
 export const SET_COURSES = 'SET_COURSES';
 export const ADD_COURSE = 'ADD_COURSE';
 export const EDIT_COURSE = 'EDIT_COURSE';
+export const DELETE_COURSE = 'DELETE_COURSE';
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -36,13 +37,11 @@ const dataReducer = (state, action) => {
     case DELETE_COURSE:
       return {
         ...state,
-        courses: state.courses.filter(course => course.id !== action.course.id)
+        courses: state.courses.filter(c => c.id !== action.id)
       };
     default:
       return state;
   }
 }
-
-
 
 export default dataReducer;
