@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Lesson from "../components/Lesson";
 
 export default function LessonList(props) {

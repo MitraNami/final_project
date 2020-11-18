@@ -7,7 +7,6 @@ const useApplicationData = () => {
         users: [],
         courses: [],
         loading: true,
-        addingCourse: false,
         token: JSON.parse(localStorage.getItem('token'))
     });
 

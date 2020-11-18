@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { SAVE_COURSE } from '../reducers/dataReducer';
+import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
 
@@ -144,14 +144,17 @@ export default function CourseEdit(props) {
 
     if (course.id) {
       // Edit existing course
-      // TODO: replace with HTTP PUT to /api/courses/:courseId, i.e.:
-      //   course.id && axios.put(...)
-      history.goBack();
+      axios.put(`/api/courses/${courseId}`, course)
+        .then(res => {
+          props.dispatch({ type: EDIT_COURSE, course: res.data });
+          setSaving(false);
+          history.goBack();
+        });
     } else {
       // Adding new course
       axios.post(`/api/courses`, course)
         .then(res => {
-          props.dispatch({ type: SAVE_COURSE, course: res.data });
+          props.dispatch({ type: ADD_COURSE, course: res.data });
           setSaving(false);
           history.goBack();
         });

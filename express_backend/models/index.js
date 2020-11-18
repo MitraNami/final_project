@@ -63,10 +63,12 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
-  const addCourse = (title, description, subscription_based, price, authorized) => {
+  const addCourse = (c) => {
     const query = {
-      text: `INSERT INTO courses (title, description, subscription_based, price, authorized) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      values: [title, description, subscription_based, price, authorized]
+      text: `INSERT INTO courses (title, description, subscription_based, price, authorized)
+             VALUES ($1, $2, $3, $4, $5)
+             RETURNING *`,
+      values: [c.title, c.description, c.subscription_based, c.price, c.authorized]
     }
 
     return db.query(query)
@@ -74,6 +76,19 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const editCourse = (c) => {
+    const query = {
+      text: `UPDATE courses SET (title, description, subscription_based, price, authorized)
+             = ($1, $2, $3, $4, $5)
+             WHERE id = $6
+             RETURNING *`,
+      values: [c.title, c.description, c.subscription_based, c.price, c.authorized, c.id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
 
   const getRegistrations = () => {
     const query = {
@@ -103,6 +118,7 @@ module.exports = (db, bcrypt) => {
     getUsersPosts,
     getCourses,
     addCourse,
+    editCourse,
     getRegistrations,
     addRegistration,
     bcrypt

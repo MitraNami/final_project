@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { SAVE_COURSE } from '../reducers/dataReducer';
+import { ADD_COURSE } from '../reducers/dataReducer';
 
 export default function NewCourse(props) {
   const [course, setCourse] = useState({
@@ -112,7 +112,7 @@ export default function NewCourse(props) {
     setSaving(true);
     return axios.post(`/api/courses`, course)
       .then(res => {
-        props.dispatch({ type: SAVE_COURSE, course: res.data });
+        props.dispatch({ type: ADD_COURSE, course: res.data });
         setSaving(false);
         props.onClose();
       });
