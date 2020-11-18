@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import {getLessonsByCourseId} from '../helpers/selectors';
 
 
 const useContentData = (courseId) => {
@@ -11,14 +10,13 @@ const useContentData = (courseId) => {
     lessons: []
   });
 
-  // useEffect(() => {
-  //   axios.get('/api/lessons')
-  //     .then((result) => {
-  //       const allLessons = result.data;
-  //        const lessons = getLessonsByCourseId(courseId, allLessons);
-  //       setState(prev => ({...prev, lessons}));
-  //     })
-  // }, []);
+  useEffect(() => {
+    axios.get(`/api/lessons/course/${courseId}`)
+      .then((result) => {
+        const lessons = result.data;
+        setState(prev => ({...prev, lessons}));
+      })
+  }, []);
 
 
 const lessons = state.lessons;

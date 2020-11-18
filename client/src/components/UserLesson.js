@@ -1,6 +1,6 @@
 
 //UserLesson renders a lesson to the user
-const UserLesson = ({videoUrl, noteUrl}) => {
+const UserLesson = (props) => {
 
   return (
     <div>
