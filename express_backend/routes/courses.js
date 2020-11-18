@@ -16,13 +16,13 @@ module.exports = ({
   router.post('/', (req, res) => {
     const course = {
       title,
-      content,
+      description,
       subscription_based,
       price,
       authorized
     } = req.body;
 
-    addCourse(course.title, course.content, course.subscription_based, course.price, course.authorized)
+    addCourse(course.title, course.description, course.subscription_based, course.price, course.authorized)
       .then(newCourse => res.json(newCourse))
       .catch(err => res.json({
         error: err.message

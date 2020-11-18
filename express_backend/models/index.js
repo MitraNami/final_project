@@ -63,10 +63,10 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
-  const addCourse = (title, content, subscription_based, price, authorized) => {
+  const addCourse = (title, description, subscription_based, price, authorized) => {
     const query = {
-      text: `INSERT INTO courses (title, content, subscription_based, price, authorized) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      values: [title, content, subscription_based, price, authorized]
+      text: `INSERT INTO courses (title, description, subscription_based, price, authorized) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      values: [title, description, subscription_based, price, authorized]
     }
 
     return db.query(query)

@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS registrations CASCADE;
+DROP TABLE IF EXISTS subscription CASCADE;
 
-CREATE TABLE registrations(
+CREATE TABLE subscription(
     id SERIAL PRIMARY KEY NOT NULL,
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP,

@@ -11,6 +11,7 @@ import Home from './components/Home';
 import CoursesPage from './components/CoursesPage';
 import CourseHomePage from './components/CourseHomePage';
 import CoursePage from './components/CoursePage'
+import CourseEdit from 'components/CourseEdit';
 //import Courses from './components/Courses'; //we both did /courses route
 
 
@@ -41,14 +42,16 @@ function App() {
           <Route path='/signup'>
             <Signup dispatch={dispatch} />
           </Route>
-          <Route path='/admin/account'> {/*make it a private route*/}
+          <Route exact path='/admin/account'> {/*make it a private route*/}
             <CourseAdmin state={state} dispatch={dispatch} />
           </Route>
-          {/* <Route path='/courses'>
-            <Courses state={state} dispatch={dispatch} />
-          </Route> */}
+          <Route exact path='/admin/account/courses/:courseId'> {/*make it a private route*/}
+            <CourseEdit state={state} dispatch={dispatch} />
+          </Route>
+          <Route exact path='/admin/account/courses/new'> {/*make it a private route*/}
+            <CourseEdit state={state} dispatch={dispatch} />
+          </Route>
         </Switch>
-
       </Router>
     </div>
   );
