@@ -33,6 +33,11 @@ const dataReducer = (state, action) => {
         ...state,
         courses: state.courses.map(c => c.id === action.course.id ? action.course : c)
       };
+    case DELETE_COURSE:
+      return {
+        ...state,
+        courses: state.courses.filter(course => course.id !== action.course.id)
+      };
     default:
       return state;
   }

@@ -7,5 +7,6 @@ CREATE TABLE lessons(
     release_date TIMESTAMP NOT NULL,
     video_url VARCHAR(255),
     note_url VARCHAR(255),
+    price INTEGER,
     course_id INTEGER REFERENCES courses(id)
 );

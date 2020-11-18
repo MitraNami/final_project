@@ -1,5 +1,5 @@
 INSERT INTO
-lessons(title, description, release_date, video_url, note_url, course_id)
+lessons(title, description, release_date, video_url, note_url, price, course_id)
 VALUES
     (
         'Lesson 1',
@@ -7,6 +7,7 @@ VALUES
         to_timestamp(1605575289),
         'http://www.example.com',
         'http://www.example.com',
+        234,
         1
     ),
     (
@@ -15,6 +16,7 @@ VALUES
         to_timestamp(1605575289),
         'http://www.example.com',
         'http://www.example.com',
+        345,
         1
     ),
     (
@@ -23,5 +25,6 @@ VALUES
         to_timestamp(1605575289),
         'http://www.example.com',
         'http://www.example.com',
+        877,
         1
     );

@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import dataReducer, { SET_USERS, SET_COURSES } from '../reducers/dataReducer';
+
 import axios from 'axios';
 
 const useApplicationData = () => {
@@ -20,9 +21,19 @@ const useApplicationData = () => {
         });
     }, []);
 
+    function deleteCourse(id) {
+        const course = {
+            ...state.courses[id]
+        };
+
+        return axios.delete(`/admin/account/courses/${id}`)
+            .then(() => dispatch({ ...state, course }));
+    }
+
     return {
         state,
         dispatch,
+        deleteCourse
     };
 };
 
