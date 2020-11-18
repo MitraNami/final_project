@@ -1,10 +1,10 @@
 import React from "react";
 import CourseList from './CourseList';
 
-export default function CourseAdmin(props) {
+export default function Courses(props) {
 
   return (
-    <section className="courseAdmin">
+    <section className="courses">
       <div className="container">
         <div className="row">
           <h1>Courses</h1>

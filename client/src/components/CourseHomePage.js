@@ -28,7 +28,7 @@ const CourseHomePage = (props) => {
     if (props.state.token) {
       //the user is logged in and not registered to the course
       //you need to register them in the course, there are three possibilities
-     
+
       if (course.authorized === true && course.price === 0) {
         //register the user, and on successful registration to the database
         //take them to the content page of the course
@@ -39,7 +39,7 @@ const CourseHomePage = (props) => {
       } else if (course.authorized === true && course.price !== 0) {
         //take them to payment page, on successful payment, reister them, take them to content page
         console.log('to pyament page');
-        
+
       } else if (course.authorized === false) {
         //User can not register in this course, display a modal to send a 
         //registration request to admin
