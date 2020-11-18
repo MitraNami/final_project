@@ -1,8 +1,17 @@
 import {useParams} from 'react-router-dom';
 
-const CoursePage = () => {
+import useContentData from 'hooks/useContentData';
+import UserLesson from 'components/UserLesson';
+
+const CoursePage = (props) => {
 
   const { courseId } = useParams();
+
+   //we need to get all the lessons with this course id from the database
+  const {lessons} = useContentData(courseId);
+  
+  
+ 
 
     //you needd to go to the lessons table and get all the lessons
     //for this course id; then show them all. if the course is
@@ -12,21 +21,8 @@ const CoursePage = () => {
   return (
     <div>
       Content of course with id: {courseId}
-    <div className="d-flex flex-row justify-content-start pt-5 pl-5">
-      <img src="https://picsum.photos/seed/picsum/200/200" alt="video" />
-      <div className="d-flex flex-column justify-content-between pl-3">
-        <span>pdf file</span>
-        <button className="btn btn-primary">Buy now!</button>
-      </div>
-    </div>
-     
-    <div className="d-flex flex-row justify-content-start pt-5 pl-5">
-      <img src="https://picsum.photos/id/237/200/200" alt="video" />
-      <div className="d-flex flex-column justify-content-between pl-3">
-        <span>pdf file</span>
-        <button className="btn btn-primary">Buy now!</button>
-      </div>
-    </div>
+
+      <UserLesson />
 
 
     </div>
