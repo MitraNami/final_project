@@ -45,10 +45,10 @@ function App() {
           <Route exact path='/admin/account'> {/*make it a private route*/}
             <CourseAdmin state={state} dispatch={dispatch} />
           </Route>
-          <Route exact path='/admin/account/courses/:courseId'> {/*make it a private route*/}
+          <Route exact path='/admin/account/courses/new'> {/*make it a private route*/}
             <CourseEdit state={state} dispatch={dispatch} />
           </Route>
-          <Route exact path='/admin/account/courses/new'> {/*make it a private route*/}
+          <Route exact path='/admin/account/courses/:courseId'> {/*make it a private route*/}
             <CourseEdit state={state} dispatch={dispatch} />
           </Route>
         </Switch>
