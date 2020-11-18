@@ -10,6 +10,7 @@ const dbHelpers = require('./models/index')(db, bcrypt);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
+const lessonRouter = require('./routes/lessons');
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/courses', coursesRouter(dbHelpers));
+app.use('/api/lessons', lessonRouter(dbHelpers));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
