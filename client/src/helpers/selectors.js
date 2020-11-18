@@ -16,17 +16,9 @@ const getCourseById = (courseId, courses) => {
 };
 
 
-//returns the lessons of a given course
-const getLessonsByCourseId = (courseId, allLessons) => {
-  return allLessons.filter(lesson => lesson.course_id === Number(courseId));
-};
-
-
-
 
 
 export {
   isRegisteredForACourse,
   getCourseById,
-  getLessonsByCourseId
 };
