@@ -3,6 +3,8 @@ import axios from "axios";
 import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
+import useContentData from 'hooks/useContentData';
+import LessonList from './LessonList';
 
 export default function CourseEdit(props) {
 
@@ -18,6 +20,7 @@ export default function CourseEdit(props) {
       subscription_based: false,
       authorized: false
     });
+  const { lessons } = useContentData(courseId);
 
   return (
     <section className="courseEdit">
@@ -116,7 +119,7 @@ export default function CourseEdit(props) {
         <div className="row">
           <h4>Lessons</h4>
         </div>
-        {/* <LessonList lessons={props.state.courses.find(course => course.id === courseId).lessons} dispatch={props.dispatch} admin={true} /> */}
+        <LessonList lessons={lessons} dispatch={props.dispatch} admin={true} />
       </div>
     </section >
 
