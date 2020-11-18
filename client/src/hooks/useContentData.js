@@ -14,7 +14,6 @@ const useContentData = (courseId) => {
     axios.get(`/api/lessons/course/${courseId}`)
       .then((result) => {
         const lessons = result.data;
-        console.log(lessons)
         setState(prev => ({...prev, lessons}));
       })
   }, []);
