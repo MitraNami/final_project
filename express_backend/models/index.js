@@ -108,6 +108,18 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const addSubscription = (userId, courseId) => {
+    const query = {
+      text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
+      values: [userId, courseId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows[0])
+      .catch(err => console.log(err.message));
+  }
+
   return {
     getUsers,
     getUserByEmail,
@@ -118,6 +130,7 @@ module.exports = (db, bcrypt) => {
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,
+    addSubscription,
     bcrypt
   };
 };
