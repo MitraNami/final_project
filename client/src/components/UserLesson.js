@@ -8,7 +8,8 @@ const UserLesson = (props) => {
 
   return (
     <div className="border m-3">
-
+      {/* if the user does not have access to the lesson, show them a buy now button */}
+      {!access && <button>Buy now!</button>} 
       <h4>{lesson.title}</h4>
       <p>{lesson.description}</p>   {/* it will come from the text editor, remove the p tags then */}
       <div>

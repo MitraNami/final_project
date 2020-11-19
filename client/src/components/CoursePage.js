@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import axios from 'axios';
 
 import useContentData from 'hooks/useContentData';
 import UserLesson from 'components/UserLesson';
@@ -30,12 +31,27 @@ const CoursePage = (props) => {
     }
 
 
+  const handleSubscription = () => {
+    axios.post('/api/subscriptions', {
+      user_id: props.state.token.userId,
+      course_id: courseId
+    })
+    .then(result => console.log(result.data))
+    .catch(error => console.log(error, 'didn not subscribe successfully'));
+
+  };
 
     //if subscription based only give access to the ones in
     //the sub period. lock the rest with the buy now button
   return (
     <div>
       Content of course with id: {courseId}
+
+
+      {subscriptionBased && <>
+        <button onClick={handleSubscription}>Subscribe!</button>
+        <button>Cancel subscription!</button>
+      </>}
 
       {LessonsList}
       
