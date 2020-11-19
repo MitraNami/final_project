@@ -21,8 +21,6 @@ const CourseHomePage = (props) => {
     isRegisteredForACourse(props.state.token.userId, courseId, registrations) : false;
 
   const course = getCourseById(courseId, props.state.courses);
-  console.log(course);
-
 
   const handleClick = () => {
     if (props.state.token) {
@@ -59,7 +57,7 @@ const CourseHomePage = (props) => {
 
   return (
     <div>
-      Home page of course: {course.title} <br /> {course.description}
+      Home page of course: {course && course.title} <br /> {course && course.description}
       {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
       {modalShow && <SignupLoginModal cancelModal={setModalShow} />}
