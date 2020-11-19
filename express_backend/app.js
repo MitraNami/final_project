@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
 const lessonRouter = require('./routes/lessons');
+const subscriptionsRouter = require('./routes/subscriptions');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/courses', coursesRouter(dbHelpers));
 app.use('/api/lessons', lessonRouter(dbHelpers));
+app.use('/api/subscriptions', subscriptionsRouter(dbHelpers));
 
 
 // catch 404 and forward to error handler
