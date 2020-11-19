@@ -3,6 +3,7 @@ import axios from "axios";
 import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
+import { Link, useRouteMatch } from 'react-router-dom';
 import useContentData from 'hooks/useContentData';
 import LessonList from './LessonList';
 
@@ -21,6 +22,7 @@ export default function CourseEdit(props) {
       authorized: false
     });
   const { lessons } = useContentData(courseId);
+  const { url } = useRouteMatch();
 
   return (
     <section className="courseEdit">
@@ -120,6 +122,9 @@ export default function CourseEdit(props) {
           <h4>Lessons</h4>
         </div>
         <LessonList lessons={lessons} dispatch={props.dispatch} admin={true} />
+        <div className="col">
+          <Link className="btn btn-primary" to={`${url}/course/lesson/new`}>Add lesson</Link>
+        </div>
       </div>
     </section >
 

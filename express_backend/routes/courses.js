@@ -5,7 +5,8 @@ module.exports = ({
   getCourses,
   addCourse,
   editCourse,
-  deleteCourse
+  deleteCourse,
+  deleteLessonsForCourse
 }) => {
   router.get('/', (req, res) => {
     getCourses()
@@ -49,11 +50,11 @@ module.exports = ({
   });
 
   router.delete('/:id', (req, res) => {
-    deleteCourse(req.params.id)
-      .then(result => res.json(result))
-      .catch(err => res.json({
-        error: err.message
-      }));
+    Promise.all([
+      deleteLessonsForCourse(req.params.id),
+      deleteCourse(req.params.id)
+    ]).then(all => res.json(all[1]))
+      .catch(err => res.json({ error: err.message }))
   });
 
   return router;
