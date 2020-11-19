@@ -15,10 +15,17 @@ const getCourseById = (courseId, courses) => {
   return courses.find(course => course.id === Number(courseId));
 };
 
+//return the lesson object with the given id
+const getLessonById = (lessonId, lessons) => {
+  //lessonId is a string
+  return lessons.find(lesson => lesson.id === Number(lessonId));
+};
+
 
 
 
 export {
   isRegisteredForACourse,
   getCourseById,
+  getLessonById
 };

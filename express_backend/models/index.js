@@ -134,6 +134,41 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const addLesson = (l) => {
+    const query = {
+      text: `INSERT INTO lessons (title, description, release_date, video_url, note_url, price, course_id)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
+             RETURNING *`,
+      values: [l.title, l.description, l.release_date, l.video_url, l.note_url, l.price, l.course_id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  const deleteLesson = (id) => {
+    const query = {
+      text: `DELETE FROM lessons WHERE id = $1`,
+      values: [id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
+  const deleteLessonsForCourse = (courseId) => {
+    const query = {
+      text: `DELETE FROM lessons WHERE course_id = $1`,
+      values: [courseId]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -146,6 +181,9 @@ module.exports = (db, bcrypt) => {
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,
+    addLesson,
+    deleteLesson,
+    deleteLessonsForCourse,
     bcrypt
   };
 };
