@@ -67,7 +67,7 @@ export default function LessonEdit(props) {
             <div className="col-sm-10">
               <input
                 name="release_date"
-                type="date"
+                type="datetime-local"
                 value={lesson.release_date}
                 placeholder="Enter date"
                 onChange={handleInputChange}
