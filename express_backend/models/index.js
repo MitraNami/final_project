@@ -118,7 +118,19 @@ module.exports = (db, bcrypt) => {
       .query(query)
       .then(result => result.rows[0])
       .catch(err => console.log(err.message));
-  }
+  };
+
+  const getSubscriptionsByUserIdCourseId = (userId, courseId) => {
+    const query = {
+      text: `SELECT * FROM subscriptions WHERE user_id = $1 AND course_id = $2`,
+      values: [userId, courseId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows)
+      .catch(err => console.log(err.message));
+  };
 
   return {
     getUsers,
@@ -131,6 +143,7 @@ module.exports = (db, bcrypt) => {
     addRegistration,
     getLessonsByCourseId,
     addSubscription,
+    getSubscriptionsByUserIdCourseId,
     bcrypt
   };
 };

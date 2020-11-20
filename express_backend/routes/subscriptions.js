@@ -1,13 +1,25 @@
+const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 
 
 
 module.exports = ({
-  addSubscription
+  addSubscription,
+  getSubscriptionsByUserIdCourseId
 }) => {
 
-   /* GET users listing. */
+    /*Get subscriptions for a specific user in a specific course */
+    router.get('/:userId&:courseId', (req, res) => {
+      const {userId, courseId} = req.params;
+      getSubscriptionsByUserIdCourseId(userId, courseId)
+        .then(subsctiptions => res.json(subsctiptions))
+        .catch((err) => res.json({
+          error: err.message
+        }));
+    });
+
+   /* subscribe a user in a course */
    router.post('/', (req, res) => {
     
     const {
@@ -24,12 +36,6 @@ module.exports = ({
       }));
 
   });
-
-
-
-
-
-
 
 
 
