@@ -21,7 +21,7 @@ export default function CourseEdit(props) {
       subscription_based: false,
       authorized: false
     });
-  const { lessons } = useContentData(courseId);
+  const { lessons, deleteLesson } = useContentData(courseId);
   const { url } = useRouteMatch();
 
   return (
@@ -118,16 +118,19 @@ export default function CourseEdit(props) {
           {saving && (<span>Saving...</span>)}
         </form>
 
-        <div className="row">
-          <h4>Lessons</h4>
-        </div>
-        <LessonList lessons={lessons} dispatch={props.dispatch} admin={true} />
-        <div className="col">
-          <Link className="btn btn-primary" to={`${url}/course/lesson/new`}>Add lesson</Link>
-        </div>
+        {courseId && (
+          <>
+            <div className="row">
+              <h4>Lessons</h4>
+            </div>
+            <LessonList lessons={lessons} deleteLesson={deleteLesson} admin={true} />
+            <div className="col">
+              <Link className="btn btn-primary" to={`${url}/lesson/new`}>Add lesson</Link>
+            </div>
+          </>
+        )}
       </div>
     </section >
-
   );
 
   function handleInputChange(event) {

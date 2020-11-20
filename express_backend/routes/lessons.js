@@ -3,7 +3,8 @@ const router = express.Router();
 
 module.exports = ({
   getLessonsByCourseId,
-  addLesson
+  addLesson,
+  deleteLesson
 }) => {
 
   router.get('/course/:id', (req, res) => {
@@ -29,6 +30,14 @@ module.exports = ({
 
     addLesson(lesson)
       .then(newLesson => res.json(newLesson))
+      .catch(err => res.json({
+        error: err.message
+      }));
+  });
+
+  router.delete('/:id', (req, res) => {
+    deleteLesson(req.params.id)
+      .then(result => res.json(result))
       .catch(err => res.json({
         error: err.message
       }));
