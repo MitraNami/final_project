@@ -15,16 +15,17 @@ const getCourseById = (courseId, courses) => {
   return courses.find(course => course.id === Number(courseId));
 };
 
-//reutns true if the user has an active subscription otherwise false
+//reutns true and the id of subscription if the user has an active 
+//subscription otherwise false and null
 const isActiveSubscriber = (subscriptions) => {
   //if there is a subscription period with null as the end_date
   //the user has an active subscription
   for (const subscription of subscriptions) {
     if (subscription.end_date === null) {
-      return true;
+      return [true, subscription.id];
     }
   }
-  return false;
+  return [false, null];
 };
 
 //return the lesson object with the given id
