@@ -34,6 +34,7 @@ VALUES
         to_timestamp(1592680844000),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        400,
         4
     ),
     (
@@ -42,6 +43,7 @@ VALUES
         to_timestamp(1593289244000),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        400,
         4
     ),
      (
@@ -50,6 +52,7 @@ VALUES
         to_timestamp(1751055644000),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        400,
         4
     ),
     (
@@ -58,5 +61,6 @@ VALUES
         to_timestamp(1782591644000),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        400,
         4
     )
