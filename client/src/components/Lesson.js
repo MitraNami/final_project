@@ -1,7 +1,8 @@
+import axios from "axios";
 import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
 
-export default function Course(props) {
+export default function Lesson(props) {
 
   const { url } = useRouteMatch();
 
@@ -10,12 +11,12 @@ export default function Course(props) {
       <div className="col">
         {props.title}
       </div>
-      { props.admin && (<div className="col-1"><Link className="btn btn-primary" to={`${url}/courses/lessons/${props.id}`}>Edit</Link></div>)}
-      { props.admin && (<div className="col-1"><button type="submit" className="btn btn-primary" onClick={delCourse}>Delete</button></div>)}
+      { props.admin && (<div className="col-1"><Link className="btn btn-primary" to={`${url}/lessons/${props.id}`}>Edit</Link></div>)}
+      { props.admin && (<div className="col-1"><button type="submit" className="btn btn-primary" onClick={del}>Delete</button></div>)}
     </div>
   );
 
-  function delCourse() {
-
+  function del() {
+    props.deleteLesson(props.id);
   }
 }

@@ -19,8 +19,17 @@ const useContentData = (courseId) => {
 
   const lessons = state.lessons;
 
+  function deleteLesson(lessonId) {
+    return axios.delete(`/api/lessons/${lessonId}`)
+      .then(() => setState(prev => ({
+        ...prev,
+        lessons: lessons.filter(l => l.id !== lessonId)
+      })));
+  }
+
   return {
-    lessons
+    lessons,
+    deleteLesson
   }
 };
 
