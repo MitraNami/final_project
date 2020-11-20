@@ -40,4 +40,20 @@ VALUES
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         4
-    );
+    ),
+     (
+        'Lesson 3: semiconductors in industry',
+        'The study of semiconductor materials began in the early 19th century. The elemental semiconductors are those composed of single species of atoms, such as silicon (Si), germanium (Ge), and tin (Sn) in column IV and selenium (Se) and tellurium (Te) in column VI of the periodic table.',
+        to_timestamp(1751055644000),
+        'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
+        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        4
+    ),
+    (
+        'Lesson 4: semiconductors in industry',
+        'The study of semiconductor materials began in the early 19th century. The elemental semiconductors are those composed of single species of atoms, such as silicon (Si), germanium (Ge), and tin (Sn) in column IV and selenium (Se) and tellurium (Te) in column VI of the periodic table.',
+        to_timestamp(1782591644000),
+        'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
+        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        4
+    )
