@@ -16,7 +16,7 @@ const useContentData = (courseId) => {
         const lessons = result.data;
         setState(prev => ({...prev, lessons}));
       })
-  }, []);
+  }, [courseId]);
 
 
 const lessons = state.lessons;
