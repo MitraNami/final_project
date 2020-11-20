@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import dataReducer, { SET_USERS, SET_COURSES } from '../reducers/dataReducer';
+
 import axios from 'axios';
 
 const useApplicationData = () => {
@@ -7,7 +8,6 @@ const useApplicationData = () => {
         users: [],
         courses: [],
         loading: true,
-        addingCourse: false,
         token: JSON.parse(localStorage.getItem('token'))
     });
 
@@ -23,7 +23,7 @@ const useApplicationData = () => {
 
     return {
         state,
-        dispatch,
+        dispatch
     };
 };
 

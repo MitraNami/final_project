@@ -1,5 +1,5 @@
 INSERT INTO
-lessons(title, description, release_date, video_url, note_url, course_id)
+lessons(title, description, release_date, video_url, note_url, price, course_id)
 VALUES
     (
         'Lesson 1',
@@ -7,6 +7,7 @@ VALUES
         to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108731/samples/elephants.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        234,
         1
     ),
     (
@@ -15,6 +16,7 @@ VALUES
         to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        345,
         1
     ),
     (
@@ -23,6 +25,7 @@ VALUES
         to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        877,
         1
     ),
     (

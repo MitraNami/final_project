@@ -63,10 +63,12 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
-  const addCourse = (title, description, subscription_based, price, authorized) => {
+  const addCourse = (c) => {
     const query = {
-      text: `INSERT INTO courses (title, description, subscription_based, price, authorized) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      values: [title, description, subscription_based, price, authorized]
+      text: `INSERT INTO courses (title, description, subscription_based, price, authorized)
+             VALUES ($1, $2, $3, $4, $5)
+             RETURNING *`,
+      values: [c.title, c.description, c.subscription_based, c.price, c.authorized]
     }
 
     return db.query(query)
@@ -74,6 +76,30 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const editCourse = (c) => {
+    const query = {
+      text: `UPDATE courses SET (title, description, subscription_based, price, authorized)
+             = ($1, $2, $3, $4, $5)
+             WHERE id = $6
+             RETURNING *`,
+      values: [c.title, c.description, c.subscription_based, c.price, c.authorized, c.id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  const deleteCourse = (id) => {
+    const query = {
+      text: `DELETE FROM courses WHERE id = $1`,
+      values: [id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
 
   const getRegistrations = () => {
     const query = {
@@ -132,6 +158,41 @@ module.exports = (db, bcrypt) => {
       .catch(err => console.log(err.message));
   };
 
+  const addLesson = (l) => {
+    const query = {
+      text: `INSERT INTO lessons (title, description, release_date, video_url, note_url, price, course_id)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
+             RETURNING *`,
+      values: [l.title, l.description, l.release_date, l.video_url, l.note_url, l.price, l.course_id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  const deleteLesson = (id) => {
+    const query = {
+      text: `DELETE FROM lessons WHERE id = $1`,
+      values: [id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
+  const deleteLessonsForCourse = (courseId) => {
+    const query = {
+      text: `DELETE FROM lessons WHERE course_id = $1`,
+      values: [courseId]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -139,11 +200,16 @@ module.exports = (db, bcrypt) => {
     getUsersPosts,
     getCourses,
     addCourse,
+    editCourse,
+    deleteCourse,
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,
     addSubscription,
     getSubscriptionsByUserIdCourseId,
+    addLesson,
+    deleteLesson,
+    deleteLessonsForCourse,
     bcrypt
   };
 };

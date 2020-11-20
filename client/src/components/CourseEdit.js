@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { SAVE_COURSE } from '../reducers/dataReducer';
+import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
+import { Link, useRouteMatch } from 'react-router-dom';
+import useContentData from 'hooks/useContentData';
+import LessonList from './LessonList';
 
 export default function CourseEdit(props) {
 
   const history = useHistory();
   const { courseId } = useParams();
   const [saving, setSaving] = useState(false);
-  const course = { ...getCourseById(courseId, props.state.courses) };
-  const [courseData, setCourseData] = useState(course.id || {
-    title: '',
-    description: '',
-    price: '',
-    subscription_based: false,
-    authorized: false
-  });
-  console.log(courseData);
+  const [course, setCourse] = useState(courseId
+    ? { ...getCourseById(courseId, props.state.courses) }
+    : {
+      title: '',
+      description: '',
+      price: '',
+      subscription_based: false,
+      authorized: false
+    });
+  const { lessons } = useContentData(courseId);
+  const { url } = useRouteMatch();
 
   return (
     <section className="courseEdit">
       <div className="container">
         <div className="row">
           <h4>
-            {courseData.id && 'Edit Course'}
-            {!courseData.id && 'Add Course'}
+            {course.id && 'Edit Course'}
+            {!course.id && 'Add Course'}
           </h4>
         </div>
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -37,7 +42,7 @@ export default function CourseEdit(props) {
               <input
                 name="title"
                 type="text"
-                value={courseData.title}
+                value={course.title}
                 placeholder="Enter Name"
                 onChange={handleInputChange}
               />
@@ -52,7 +57,7 @@ export default function CourseEdit(props) {
               <input
                 name="description"
                 type="text"
-                value={courseData.description}
+                value={course.description}
                 placeholder="Enter Description"
                 onChange={handleInputChange}
               />
@@ -67,7 +72,7 @@ export default function CourseEdit(props) {
               <input
                 name="price"
                 type="text"
-                value={courseData.price}
+                value={course.price}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
@@ -80,7 +85,7 @@ export default function CourseEdit(props) {
                 <input className="form-check-input"
                   name="subscription_based"
                   type="checkbox"
-                  checked={courseData.subscription_based}
+                  checked={course.subscription_based}
                   onChange={handleInputChange}
                   id="defaultCheck1"
                 />
@@ -97,7 +102,7 @@ export default function CourseEdit(props) {
                 <input className="form-check-input"
                   name="authorized"
                   type="checkbox"
-                  checked={courseData.authorized}
+                  checked={course.authorized}
                   onChange={handleInputChange}
                   id="defaultCheck2"
                 />
@@ -116,7 +121,10 @@ export default function CourseEdit(props) {
         <div className="row">
           <h4>Lessons</h4>
         </div>
-        {/* <LessonList lessons={props.state.courses.find(course => course.id === courseId).lessons} dispatch={props.dispatch} admin={true} /> */}
+        <LessonList lessons={lessons} dispatch={props.dispatch} admin={true} />
+        <div className="col">
+          <Link className="btn btn-primary" to={`${url}/course/lesson/new`}>Add lesson</Link>
+        </div>
       </div>
     </section >
 
@@ -126,8 +134,8 @@ export default function CourseEdit(props) {
     const target = event.target;
     let value = target.type === 'checkbox' ? target.checked : target.value;
     if (target.name === 'price') value = parseInt(value);
-    setCourseData({
-      ...courseData,
+    setCourse({
+      ...course,
       [target.name]: value
     });
   }
@@ -137,21 +145,23 @@ export default function CourseEdit(props) {
   }
 
   function save() {
-    console.log(courseData);
     // TODO: validate form data
 
     setSaving(true);
 
-    if (courseData.id) {
+    if (course.id) {
       // Edit existing course
-      // TODO: replace with HTTP PUT to /api/courses/:courseId, i.e.:
-      //   courseData.id && axios.put(...)
-      history.goBack();
+      axios.put(`/api/courses/${courseId}`, course)
+        .then(res => {
+          props.dispatch({ type: EDIT_COURSE, course: res.data });
+          setSaving(false);
+          history.goBack();
+        });
     } else {
       // Adding new course
-      axios.post(`/api/courses`, courseData)
+      axios.post(`/api/courses`, course)
         .then(res => {
-          props.dispatch({ type: SAVE_COURSE, course: res.data });
+          props.dispatch({ type: ADD_COURSE, course: res.data });
           setSaving(false);
           history.goBack();
         });

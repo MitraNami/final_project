@@ -12,8 +12,7 @@ import CoursesPage from './components/CoursesPage';
 import CourseHomePage from './components/CourseHomePage';
 import CoursePage from './components/CoursePage'
 import CourseEdit from 'components/CourseEdit';
-//import Courses from './components/Courses'; //we both did /courses route
-
+import LessonEdit from 'components/LessonEdit';
 
 function App() {
 
@@ -45,10 +44,13 @@ function App() {
           <Route exact path='/admin/account'> {/*make it a private route*/}
             <CourseAdmin state={state} dispatch={dispatch} />
           </Route>
-          <Route exact path='/admin/account/courses/:courseId'> {/*make it a private route*/}
+          <Route exact path='/admin/account/courses/new'> {/*make it a private route*/}
             <CourseEdit state={state} dispatch={dispatch} />
           </Route>
-          <Route exact path='/admin/account/courses/new'> {/*make it a private route*/}
+          <Route exact path='/admin/account/courses/:courseId/course/lesson/new'> {/*make it a private route*/}
+            <LessonEdit />
+          </Route>
+          <Route exact path='/admin/account/courses/:courseId'> {/*make it a private route*/}
             <CourseEdit state={state} dispatch={dispatch} />
           </Route>
         </Switch>
