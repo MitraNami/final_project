@@ -31,7 +31,7 @@ VALUES
     (
         'Lesson 1: what is a semiconductor? ',
         'semiconductor lies between metal (conductors) and non-metal (insulators) therefore it behaves like an insulator and doesnt conduct electricity but depending upon the situation it can also conduct electricity and behave like an insulator.',
-        to_timestamp(1592680844000),
+        to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         400,
@@ -40,7 +40,7 @@ VALUES
     (
         'Lesson 2: examples of semiconductors ',
         'The study of semiconductor materials began in the early 19th century. The elemental semiconductors are those composed of single species of atoms, such as silicon (Si), germanium (Ge), and tin (Sn) in column IV and selenium (Se) and tellurium (Te) in column VI of the periodic table.',
-        to_timestamp(1593289244000),
+        to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         400,
@@ -49,7 +49,7 @@ VALUES
      (
         'Lesson 3: semiconductors in industry',
         'The study of semiconductor materials began in the early 19th century. The elemental semiconductors are those composed of single species of atoms, such as silicon (Si), germanium (Ge), and tin (Sn) in column IV and selenium (Se) and tellurium (Te) in column VI of the periodic table.',
-        to_timestamp(1751055644000),
+        to_timestamp(1605575289),
         'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         400,
@@ -58,8 +58,8 @@ VALUES
     (
         'Lesson 4: semiconductors in industry',
         'The study of semiconductor materials began in the early 19th century. The elemental semiconductors are those composed of single species of atoms, such as silicon (Si), germanium (Ge), and tin (Sn) in column IV and selenium (Se) and tellurium (Te) in column VI of the periodic table.',
-        to_timestamp(1782591644000),
-        'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108727/samples/sea-turtle.mp4',
+        to_timestamp(1613323407),
+        'https://res.cloudinary.com/dxc1pdflu/video/upload/v1605108731/samples/elephants.mp4',
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         400,
         4
