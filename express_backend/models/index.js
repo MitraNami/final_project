@@ -134,6 +134,30 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const addSubscription = (userId, courseId) => {
+    const query = {
+      text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
+      values: [userId, courseId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows[0])
+      .catch(err => console.log(err.message));
+  };
+
+  const getSubscriptionsByUserIdCourseId = (userId, courseId) => {
+    const query = {
+      text: `SELECT * FROM subscriptions WHERE user_id = $1 AND course_id = $2`,
+      values: [userId, courseId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows)
+      .catch(err => console.log(err.message));
+  };
+
   const addLesson = (l) => {
     const query = {
       text: `INSERT INTO lessons (title, description, release_date, video_url, note_url, price, course_id)
@@ -181,6 +205,8 @@ module.exports = (db, bcrypt) => {
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,
+    addSubscription,
+    getSubscriptionsByUserIdCourseId,
     addLesson,
     deleteLesson,
     deleteLessonsForCourse,
