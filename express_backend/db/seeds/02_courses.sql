@@ -21,4 +21,11 @@ VALUES
         TRUE,
         100000,
         FALSE
+    ),
+    (
+        'solid state physics',
+        'Introduction to semiconductors',
+        TRUE,
+        0,
+        TRUE
     );
