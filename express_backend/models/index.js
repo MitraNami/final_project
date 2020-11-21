@@ -134,6 +134,18 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const getLessonById = lessonId => {
+    const query = {
+      text: `SELECT * FROM lessons WHERE id = $1`,
+      values: [lessonId]
+    }
+
+    return db
+      .query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
   const addSubscription = (userId, courseId) => {
     const query = {
       text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
@@ -164,6 +176,20 @@ module.exports = (db, bcrypt) => {
              VALUES ($1, $2, $3, $4, $5, $6, $7)
              RETURNING *`,
       values: [l.title, l.description, l.release_date, l.video_url, l.note_url, l.price, l.course_id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  const editLesson = (l) => {
+    const query = {
+      text: `UPDATE lessons SET (title, description, release_date, video_url, note_url, price, course_id)
+             = ($1, $2, $3, $4, $5, $6, $7)
+             WHERE id = $8
+             RETURNING *`,
+      values: [l.title, l.description, l.release_date, l.video_url, l.note_url, l.price, l.course_id, l.id]
     }
 
     return db.query(query)
@@ -218,9 +244,11 @@ module.exports = (db, bcrypt) => {
     getRegistrations,
     addRegistration,
     getLessonsByCourseId,
+    getLessonById,
     addSubscription,
     getSubscriptionsByUserIdCourseId,
     addLesson,
+    editLesson,
     deleteLesson,
     deleteLessonsForCourse,
     endSubscription,

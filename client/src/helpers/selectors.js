@@ -47,7 +47,6 @@ const replaceSubscription = (subscriptions, update, id) => {
 };
 
 
-
 export {
   isRegisteredForACourse,
   getCourseById,
