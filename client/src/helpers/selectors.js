@@ -34,6 +34,17 @@ const getLessonById = (lessonId, lessons) => {
   return lessons.find(lesson => lesson.id === Number(lessonId));
 };
 
+//returns the subscriptions array with one of its items whose
+//id is id replaced with update
+const replaceSubscription = (subscriptions, update, id) => {
+  for (let i = 0; i < subscriptions.length; i++) {
+    if (subscriptions[i].id === id) {
+      subscriptions.splice(i, 1, update);
+      break;
+    }
+  }
+  return subscriptions;
+};
 
 
 
@@ -41,5 +52,6 @@ export {
   isRegisteredForACourse,
   getCourseById,
   isActiveSubscriber,
-  getLessonById
+  getLessonById,
+  replaceSubscription
 };
