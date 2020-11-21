@@ -43,7 +43,7 @@ module.exports = ({
     } = req.body;
 
     editCourse(course)
-      .then(editedCourse => res.json(editedCourse))
+      .then(updatedCourse => res.json(updatedCourse))
       .catch(err => res.json({
         error: err.message
       }));

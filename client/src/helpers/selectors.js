@@ -27,18 +27,8 @@ const isActiveSubscriber = (subscriptions) => {
   return false;
 };
 
-//return the lesson object with the given id
-const getLessonById = (lessonId, lessons) => {
-  //lessonId is a string
-  return lessons.find(lesson => lesson.id === Number(lessonId));
-};
-
-
-
-
 export {
   isRegisteredForACourse,
   getCourseById,
-  isActiveSubscriber,
-  getLessonById
+  isActiveSubscriber
 };

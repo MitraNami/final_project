@@ -1,24 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useHistory, useParams } from 'react-router-dom';
-import { getLessonById } from '../helpers/selectors';
+import useLessonData from 'hooks/useLessonData';
+import { toLocalDatetime } from 'helpers/datetime';
 
-export default function LessonEdit(props) {
+export default function LessonEdit() {
 
   const history = useHistory();
-  const { courseId, lessonId } = useParams();
+  const { lessonId, courseId } = useParams();
   const [saving, setSaving] = useState(false);
-  const [lesson, setLesson] = useState(lessonId
-    ? { ...getLessonById(lessonId, props.state.lessons) }
-    : {
-      title: '',
-      description: '',
-      release_date: '',
-      video_url: '',
-      note_url: '',
-      price: '',
-      course_id: courseId
-    });
+  const { lesson, setLesson, saveLesson } = useLessonData(lessonId, courseId);
 
   return (
     <section className="lessonEdit">
@@ -68,7 +58,7 @@ export default function LessonEdit(props) {
               <input
                 name="release_date"
                 type="datetime-local"
-                value={lesson.release_date}
+                value={toLocalDatetime(new Date(lesson.release_date))}
                 placeholder="Enter date"
                 onChange={handleInputChange}
               />
@@ -126,16 +116,15 @@ export default function LessonEdit(props) {
         </form>
       </div>
     </section >
-
   );
 
   function handleInputChange(event) {
     const target = event.target;
 
-    setLesson({
-      ...lesson,
+    setLesson(prev => ({
+      ...prev,
       [target.name]: target.value
-    });
+    }));
   }
 
   function cancel() {
@@ -146,16 +135,10 @@ export default function LessonEdit(props) {
     // TODO: validate form data
 
     setSaving(true);
-
-    if (lesson.id) {
-      // TODO: Edit existing lesson
-    } else {
-      // Add new lesson
-      axios.post(`/api/lessons`, lesson)
-        .then(res => {
-          setSaving(false);
-          history.goBack();
-        });
-    }
+    saveLesson()
+      .then(() => {
+        setSaving(false);
+        history.goBack();
+      });
   }
 };
