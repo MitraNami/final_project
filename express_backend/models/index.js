@@ -219,6 +219,19 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const endSubscription = (id) => {
+    //we need to change the end_date from null to current timestamp
+    const query = {
+      text: `UPDATE subscriptions SET end_date = $1 WHERE id = $2 returning *`,
+      values: [new Date(), id]
+    };
+
+    return db.query(query)
+    .then(result => result.rows[0])
+    .catch(err => err);
+  };
+
+
   return {
     getUsers,
     getUserByEmail,
@@ -238,6 +251,7 @@ module.exports = (db, bcrypt) => {
     editLesson,
     deleteLesson,
     deleteLessonsForCourse,
+    endSubscription,
     bcrypt
   };
 };

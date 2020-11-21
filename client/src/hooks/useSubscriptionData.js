@@ -9,8 +9,8 @@ const useSubscriptionData = (userId, courseId) => {
     subscriptions: []
   });
 
-  const setSubscription = (newSubscription) => setState(prev => 
-    ({...prev, subscriptions:[...prev.subscriptions, newSubscription]}));
+  const setSubscription = subscriptions => setState(prev => 
+    ({...prev, subscriptions}));
 
   //Get subscriptions for a specific user in a specific course
   useEffect(() => {
