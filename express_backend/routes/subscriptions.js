@@ -25,10 +25,12 @@ module.exports = ({
     
     const {
       user_id,
-      course_id
+      course_id,
+      start_date,
+      end_date
     } = req.body;
 
-    addSubscription(user_id, course_id)
+    addSubscription(user_id, course_id, start_date, end_date)
       .then(newSubscription => {
         res.json(newSubscription);
       })
