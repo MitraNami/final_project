@@ -44,7 +44,7 @@ const Login = (props) => {
 
   return (
     <div className="d-flex flex-row justify-content-around mt-5">
-      <img className="align-self-center" src="https://cdn.pixabay.com/photo/2016/06/04/00/40/yoga-1434787_960_720.jpg" />
+      <img className="align-self-center p-2" src="https://cdn.pixabay.com/photo/2016/06/04/00/40/yoga-1434787_960_720.jpg" />
       <div className="d-flex flex-column align-self-center flex-grow-1 p-5">
         <form onSubmit={handleSubmission}>
           <div className="form-group">
