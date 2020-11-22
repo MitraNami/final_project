@@ -40,8 +40,16 @@ const CoursePage = (props) => {
             (lessonReleaseDate < subscription.end_date || subscription.end_date === null)) {
               return <UserLesson key={lesson.id} lesson={lesson} access={true} />
             }
-        }
-        return <UserLesson key={lesson.id} lesson={lesson} access={false} />;
+        } //The user should be able to gain access by purchasing the lesson
+        //so we need to pass down additional props to handle purchase
+        return <UserLesson 
+          key={lesson.id} 
+          lesson={lesson} 
+          access={false} 
+          userId={props.state.token.userId}
+          subscriptions={subscriptions}
+          setSubscription={setSubscription}
+          />;
       });
 
     }
@@ -54,7 +62,6 @@ const CoursePage = (props) => {
     })
     .then(result => {
       const newSubscription = result.data;
-      //setSubscription(newSubscription);
       setSubscription([...subscriptions, newSubscription]);
     })
     .catch(error => console.log(error, 'did not subscribe successfully'));
