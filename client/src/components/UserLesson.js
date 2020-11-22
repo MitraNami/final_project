@@ -1,14 +1,36 @@
+import axios from 'axios';
 import ReactPlayer from "react-player";
 
 //UserLesson renders a lesson to the user
 const UserLesson = (props) => {
 
-  const { lesson, access } = props;
+  const { lesson, access, userId, subscriptions, setSubscription } = props;
+
+  const handlePurchase = () => {
+    //store the new purchase as a subscription in the past
+    //a two minute interval centered at release date
+    const releaseDate = new Date(lesson.release_date).getTime();
+    const startDate = new Date(releaseDate - 60000);
+    const endDate = new Date(releaseDate + 60000);
+
+    axios.post('/api/subscriptions', {
+      user_id: userId,
+      course_id: lesson.course_id,
+      start_date: startDate,
+      end_date: endDate
+    })
+    .then(result => {
+      const newSubscription = result.data;
+      setSubscription([...subscriptions, newSubscription]);
+    })
+    .catch(error => console.log(error, 'did not purchase successfully'));
+
+  };
 
   return (
     <div className="border m-3">
       {/* if the user does not have access to the lesson, show them a buy now button */}
-      {!access && <button className="btn btn-danger">Buy now!</button>} 
+      {!access && <button onClick={handlePurchase} className="btn btn-danger">Buy now!</button>} 
       <h4>{lesson.title}</h4>
       <p>{lesson.description}</p>   {/* it will come from the text editor, remove the p tags then */}
       <div>
