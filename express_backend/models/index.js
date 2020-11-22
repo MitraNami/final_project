@@ -134,8 +134,12 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
-  const addSubscription = (userId, courseId) => {
-    const query = {
+  const addSubscription = (userId, courseId, startDate, endDate) => {
+    const query = endDate ? {
+      text: `INSERT INTO subscriptions (user_id, course_id, start_date, end_date) VALUES ($1, $2, $3, $4) RETURNING *`,
+      values: [userId, courseId, startDate, endDate]
+    }
+    : {
       text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
       values: [userId, courseId]
     }
