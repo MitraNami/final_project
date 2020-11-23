@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
@@ -38,8 +40,8 @@ export default function CourseEdit(props) {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Course name:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="title"
                 type="text"
                 value={course.title}
@@ -53,8 +55,8 @@ export default function CourseEdit(props) {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Description:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="description"
                 type="text"
                 value={course.description}
@@ -68,14 +70,20 @@ export default function CourseEdit(props) {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Price:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input class="form-control"
                 name="price"
-                type="text"
+                type="number"
                 value={course.price}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
             </div>
           </div>
 
