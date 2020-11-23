@@ -24,8 +24,8 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Name:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="title"
                 type="text"
                 value={lesson.title}
@@ -39,8 +39,8 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Description:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="description"
                 type="text"
                 value={lesson.description}
@@ -54,8 +54,8 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Release date:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="release_date"
                 type="datetime-local"
                 value={toLocalDatetime(new Date(lesson.release_date))}
@@ -69,8 +69,8 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Video:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="video_url"
                 type="text"
                 value={lesson.video_url}
@@ -84,8 +84,8 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Note:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input class="form-control"
                 name="note_url"
                 type="text"
                 value={lesson.note_url}
@@ -99,14 +99,20 @@ export default function LessonEdit() {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Price:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input class="form-control"
                 name="price"
-                type="text"
+                type="number"
                 value={lesson.price}
-                placeholder="Enter price"
+                placeholder="Enter Price"
                 onChange={handleInputChange}
               />
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
             </div>
           </div>
 
