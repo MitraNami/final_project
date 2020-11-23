@@ -6,8 +6,11 @@ import axios from 'axios';
 const useSubscriptionData = (userId, courseId) => {
 
   const [state, setState] = useState({
-    subscriptions: []
+    subscriptions: [],
+    cancelSubModalShow: false
   });
+
+  const setCancelSubModalShow = show => setState(prev => ({...prev, cancelSubModalShow: show}));
 
   const setSubscription = subscriptions => setState(prev => 
     ({...prev, subscriptions}));
@@ -24,10 +27,13 @@ const useSubscriptionData = (userId, courseId) => {
 
 
   const subscriptions = state.subscriptions;
+  const cancelSubModalShow = state.cancelSubModalShow;
 
   return {
     subscriptions,
-    setSubscription
+    setSubscription,
+    cancelSubModalShow,
+    setCancelSubModalShow
   }
 
 };

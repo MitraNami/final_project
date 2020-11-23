@@ -1,8 +1,11 @@
 import {useHistory} from 'react-router-dom';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 const SignupLoginModal = (props) => {
-
   const history = useHistory();
+  const {modalIsOpen, setModalIsOpen} = props;
 
   const handleLogin = () => {
     history.push('/login');
@@ -12,22 +15,42 @@ const SignupLoginModal = (props) => {
     history.push('/signup');
   };
 
-  const handleCancel = () => {
-    //close the signup/login modal
-    props.cancelModal(false);
-  }
 
   return (
-    <div className="overlay">
-      <div className="content">
+    
+      <Modal 
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={
+          {
+            overlay: {
+              backgroundColor: '#D3D3D3E6'
+            },
+            content: {
+              color: 'black',
+              top: '20%',
+              left: '35%',
+              width: '30%',
+              height: '40%',
+              backgroundColor: '#ff99cc',
+              border: 'black solid 3px',
+              borderRadius: '15px 50px 30px'
+            }
+          }
+        }
+        >
         <h4>You need to login or signup first:</h4>
-        <button type="submit" onClick={handleLogin}>Login</button>
         <br />
-        <button type="submit" onClick={handleSignup}>Signup</button>
-        <br />
-        <button type="submit" onClick={handleCancel}>Cancel</button>
-      </div>
-    </div>
+        <div className="container d-flex flex-column">
+          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={handleLogin}>Login</button>
+          <br />
+          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={handleSignup}>Signup</button>
+          <br />
+          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={() => setModalIsOpen(false)}>Cancel</button>
+        </div>
+      
+      </Modal>
+    
   );
 }
 

@@ -60,8 +60,8 @@ const CourseHomePage = (props) => {
       Home page of course: {course && course.title} <br /> {course && course.description}
       {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
-      {modalShow && <SignupLoginModal cancelModal={setModalShow} />}
-      {adminModalShow && <AdminModal cancelModal={setAdminModalShow} />}
+      <SignupLoginModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} />
+      <AdminModal modalIsOpen={adminModalShow} setModalIsOpen={setAdminModalShow} />
       {redirectToContent && <Redirect push to={`/courses/${courseId}/content`} />}
     </div>
   )
