@@ -7,13 +7,15 @@ const useSubscriptionData = (userId, courseId) => {
 
   const [state, setState] = useState({
     subscriptions: [],
-    cancelSubModalShow: false
+    cancelSubModalShow: false,
+    subscriptionModalShow: false
   });
 
   const setCancelSubModalShow = show => setState(prev => ({...prev, cancelSubModalShow: show}));
 
-  const setSubscription = subscriptions => setState(prev => 
-    ({...prev, subscriptions}));
+  const setSubscriptionModalShow = show => setState(prev => ({...prev, subscriptionModalShow: show}))
+
+  const setSubscription = subscriptions => setState(prev => ({...prev, subscriptions}));
 
   //Get subscriptions for a specific user in a specific course
   useEffect(() => {
@@ -28,12 +30,15 @@ const useSubscriptionData = (userId, courseId) => {
 
   const subscriptions = state.subscriptions;
   const cancelSubModalShow = state.cancelSubModalShow;
+  const subscriptionModalShow = state.subscriptionModalShow;
 
   return {
     subscriptions,
     setSubscription,
     cancelSubModalShow,
-    setCancelSubModalShow
+    setCancelSubModalShow,
+    subscriptionModalShow,
+    setSubscriptionModalShow
   }
 
 };
