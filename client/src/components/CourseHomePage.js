@@ -70,7 +70,7 @@ const CourseHomePage = (props) => {
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
       <SignupLoginModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} />
       <AdminModal modalIsOpen={adminModalShow} setModalIsOpen={setAdminModalShow} />
-      {course && 
+      {course && props.state.token &&
         <PaymentCourseModal
           modalIsOpen={paymentModalShow}
           setModalIsOpen={setPaymentModalShow} 
