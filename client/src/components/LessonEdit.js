@@ -109,7 +109,7 @@ export default function LessonEdit() {
               <input className="form-control"
                 name="price"
                 type="number"
-                value={lesson.price}
+                value={lesson.price/100}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
@@ -129,7 +129,7 @@ export default function LessonEdit() {
 
   function handleInputChange(event) {
     const target = event.target;
-
+    if (target.name === 'price') target.value = parseInt(target.value)*100;
     setLesson(prev => ({
       ...prev,
       [target.name]: target.value
