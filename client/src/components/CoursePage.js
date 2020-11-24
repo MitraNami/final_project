@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 
 import useContentData from 'hooks/useContentData';
 import useSubscriptionData from 'hooks/useSubscriptionData';
 import UserLesson from 'components/UserLesson';
+import SubscriptionModal from 'components/SubscriptionModal';
 import CancelSubModal from 'components/CancelSubModal';
 import { getCourseById, isActiveSubscriber } from '../helpers/selectors';
 
@@ -18,7 +18,9 @@ const CoursePage = (props) => {
     subscriptions,
     setSubscription,
     cancelSubModalShow,
-    setCancelSubModalShow
+    setCancelSubModalShow,
+    subscriptionModalShow,
+    setSubscriptionModalShow
   } = useSubscriptionData(props.state.token.userId, courseId);
 
   const course = getCourseById(courseId, props.state.courses);
@@ -63,16 +65,7 @@ const CoursePage = (props) => {
 
 
   const handleSubscription = () => {
-    axios.post('/api/subscriptions', {
-      user_id: props.state.token.userId,
-      course_id: courseId
-    })
-      .then(result => {
-        const newSubscription = result.data;
-        setSubscription([...subscriptions, newSubscription]);
-      })
-      .catch(error => console.log(error, 'did not subscribe successfully'));
-
+    setSubscriptionModalShow(true);
   };
 
   const handleCancellation = () => {
@@ -93,6 +86,14 @@ const CoursePage = (props) => {
           setModalIsOpen={setCancelSubModalShow}
           subscriptions={subscriptions}
           activeSubscriptionId={activeSubscriptionId}
+          setSubscription={setSubscription}
+        />
+        <SubscriptionModal
+          modalIsOpen={subscriptionModalShow}
+          setModalIsOpen={setSubscriptionModalShow}
+          userId={props.state.token.userId}
+          courseId={courseId}
+          subscriptions={subscriptions}
           setSubscription={setSubscription}
         />
       </>}

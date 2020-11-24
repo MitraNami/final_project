@@ -1,30 +1,17 @@
-import axios from 'axios';
+import { useState } from "react";
 import ReactPlayer from "react-player";
+
+import PaymentBuyNowModal from 'components/PaymentBuyNowModal';
 
 //UserLesson renders a lesson to the user
 const UserLesson = (props) => {
 
+  const [buyNowModalShow, setBuyNowModalShow] = useState(false);
+
   const { lesson, access, userId, subscriptions, setSubscription } = props;
 
   const handlePurchase = () => {
-    //store the new purchase as a subscription in the past
-    //a two minute interval centered at release date
-    const releaseDate = new Date(lesson.release_date).getTime();
-    const startDate = new Date(releaseDate - 60000);
-    const endDate = new Date(releaseDate + 60000);
-
-    axios.post('/api/subscriptions', {
-      user_id: userId,
-      course_id: lesson.course_id,
-      start_date: startDate,
-      end_date: endDate
-    })
-    .then(result => {
-      const newSubscription = result.data;
-      setSubscription([...subscriptions, newSubscription]);
-    })
-    .catch(error => console.log(error, 'did not purchase successfully'));
-
+    setBuyNowModalShow(true);
   };
 
   return (
@@ -56,6 +43,16 @@ const UserLesson = (props) => {
         {access && <a href={lesson.note_url} target="_blanck"><button>Download Now!</button></a>}
         {!access && <button disabled>Download Now!</button>}
       </footer>
+
+      <PaymentBuyNowModal
+        modalIsOpen={buyNowModalShow}
+        setModalIsOpen={setBuyNowModalShow}
+        price={lesson.price}
+        lesson={lesson}
+        userId={userId}
+        subscriptions={subscriptions}
+        setSubscription={setSubscription}
+        />
     </div>
   );
 };

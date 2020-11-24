@@ -1,18 +1,26 @@
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 import useRegistrationData from 'hooks/useRegistrationData';
 import { isRegisteredForACourse, getCourseById } from '../helpers/selectors';
 
 import SignupLoginModal from 'components/SignupLoginModal';
 import AdminModal from 'components/AdminModal';
+import PaymentCourseModal from 'components/PaymentCourseModal';
 
 
 const CourseHomePage = (props) => {
   const { courseId } = useParams();
 
-  const history = useHistory();
-  const { registrations, registerUser, setModalShow, modalShow,
-    redirectToContent, setRedirectToContent, adminModalShow,
+  const { 
+    registrations, 
+    registerUser, 
+    setModalShow, 
+    modalShow,
+    paymentModalShow,
+    setPaymentModalShow,
+    redirectToContent, 
+    setRedirectToContent, 
+    adminModalShow,
     setAdminModalShow } = useRegistrationData();
 
   //if the user is not logged(id null) or not registered in the course, is Registered will be false
@@ -35,8 +43,8 @@ const CourseHomePage = (props) => {
           .catch(error => console.log(error, 'didn not registered successfully'));
 
       } else if (course.authorized === true && course.price !== 0) {
-        //take them to payment page, on successful payment, reister them, take them to content page
-        console.log('to pyament page');
+        //take the user to payment modal
+        setPaymentModalShow(true);
 
       } else if (course.authorized === false) {
         //User can not register in this course, display a modal to send a 
@@ -62,6 +70,16 @@ const CourseHomePage = (props) => {
       {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
       <SignupLoginModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} />
       <AdminModal modalIsOpen={adminModalShow} setModalIsOpen={setAdminModalShow} />
+      {course && props.state.token &&
+        <PaymentCourseModal
+          modalIsOpen={paymentModalShow}
+          setModalIsOpen={setPaymentModalShow} 
+          price={course.price} 
+          registerUser={registerUser}
+          userId={props.state.token.userId}
+          courseId={courseId}
+          setRedirectToContent={setRedirectToContent}
+          />}
       {redirectToContent && <Redirect push to={`/courses/${courseId}/content`} />}
     </div>
   )

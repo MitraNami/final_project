@@ -6,12 +6,14 @@ const useRegistrationData = () => {
     registrations: [],
     modalShow: false,
     adminModalShow: false,
+    paymentModalShow: false,
     redirectToContent: false,
   });
 
   const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
   const setAdminModalShow = (show) => setState(prev => ({...prev, adminModalShow: show}));
   const setRedirectToContent = (redirect) => setState(prev => ({...prev, redirectToContent: redirect}));
+  const setPaymentModalShow = (show) => setState(prev => ({...prev, paymentModalShow: show}));
 
   useEffect(() => {
       axios.get('/api/users/registrations')
@@ -41,6 +43,7 @@ const useRegistrationData = () => {
   const registrations = state.registrations;
   const modalShow = state.modalShow;
   const adminModalShow = state.adminModalShow;
+  const paymentModalShow = state.paymentModalShow;
   const redirectToContent = state.redirectToContent;
 
   return {
@@ -50,6 +53,8 @@ const useRegistrationData = () => {
     setModalShow,
     adminModalShow,
     setAdminModalShow,
+    paymentModalShow,
+    setPaymentModalShow,
     redirectToContent,
     setRedirectToContent
   }

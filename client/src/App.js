@@ -13,6 +13,7 @@ import CourseHomePage from './components/CourseHomePage';
 import CoursePage from './components/CoursePage'
 import CourseEdit from 'components/CourseEdit';
 import LessonEdit from 'components/LessonEdit';
+import MyAccount from 'components/MyAccount';
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path='/signup'>
             <Signup dispatch={dispatch} />
+          </Route>
+          <Route path='/users/account'> {/*make it a private route*/}
+            <MyAccount />
           </Route>
           <Route exact path='/admin/account'> {/*make it a private route*/}
             <CourseAdmin state={state} dispatch={dispatch} />
