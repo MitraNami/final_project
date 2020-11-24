@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { getCourseById } from '../helpers/selectors';
 import { Link, useRouteMatch } from 'react-router-dom';
 import useContentData from 'hooks/useContentData';
 import LessonList from './LessonList';
+import { modules, formats } from 'helpers/quill'
 
 export default function CourseEdit(props) {
 
@@ -16,7 +19,7 @@ export default function CourseEdit(props) {
     ? { ...getCourseById(courseId, props.state.courses) }
     : {
       title: '',
-      description: '',
+      description: '<html></html>',
       price: '',
       subscription_based: false,
       authorized: false
@@ -38,8 +41,8 @@ export default function CourseEdit(props) {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Course name:
             </label>
-            <div className="col-sm-10">
-              <input
+            <div className="input-group mb-3">
+              <input className="form-control"
                 name="title"
                 type="text"
                 value={course.title}
@@ -53,13 +56,13 @@ export default function CourseEdit(props) {
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Description:
             </label>
-            <div className="col-sm-10">
-              <input
-                name="description"
-                type="text"
+            <div className="input-group mb-3">
+              <ReactQuill
+                theme="snow"
                 value={course.description}
-                placeholder="Enter Description"
-                onChange={handleInputChange}
+                modules={modules}
+                formats={formats}
+                onChange={handleDescriptionChange}
               />
             </div>
           </div>
@@ -67,15 +70,21 @@ export default function CourseEdit(props) {
           <div className="form-group row">
             <label htmlFor="inputName" className="col-sm-2 col-form-label">
               Price:
-            </label>
-            <div className="col-sm-10">
-              <input
+              </label>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text">$</span>
+              </div>
+              <input className="form-control"
                 name="price"
-                type="text"
+                type="number"
                 value={course.price}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
+              <div className="input-group-append">
+                <span className="input-group-text">.00</span>
+              </div>
             </div>
           </div>
 
@@ -140,6 +149,13 @@ export default function CourseEdit(props) {
     setCourse({
       ...course,
       [target.name]: value
+    });
+  }
+
+  function handleDescriptionChange(description) {
+    setCourse({
+      ...course,
+      description
     });
   }
 
