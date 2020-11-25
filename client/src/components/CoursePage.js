@@ -80,7 +80,7 @@ const CoursePage = (props) => {
 
       {/* we should see one of these buttons if the course is subscription based */}
       {subscriptionBased && <>
-        <div className="border p-2 bg-dark text-center rounded-pill">
+        <div className="container border p-2 bg-dark text-center rounded">
           <span className="text-white pr-2">You can subscribe to this series to receive fitness vidoes and choreography
           notes on their release.<br />Cancel your subscription at anytime.
           </span>

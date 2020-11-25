@@ -7,8 +7,7 @@ const Home = () => {
       Hello World!
     </div>
   );
-};
-
+}
 
 
 export default Home;
