@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { toLocalDatetime } from 'helpers/datetime';
 
 const useLessonData = (lessonId, courseId) => {
 
   const [lesson, setLesson] = useState({
     title: '',
     description: '',
-    release_date: '',
+    release_date: toLocalDatetime(new Date()),
     video_url: '',
     note_url: '',
-    price: '',
+    price: '0',
     course_id: courseId
   });
 
