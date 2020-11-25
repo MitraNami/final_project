@@ -61,13 +61,35 @@ const CourseHomePage = (props) => {
 
   const handleContentRender = () => {
     setRedirectToContent(true);
-  }
+  };
+
+  const createMarkup = msg => {
+    return {__html: `${msg}`};
+  };
+  
+  const courseDes = msg => {
+    return <div dangerouslySetInnerHTML={createMarkup(msg)} />;
+  };
+  
 
   return (
-    <div>
-      Home page of course: {course && course.title} <br /> {course && course.description}
-      {!isRegistered && <button type="submit" className="btn btn-primary" onClick={handleClick}>Start the Course!</button>}
-      {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course!</button>}
+    <div className="border container">
+      <div className="row justify-content-around">
+        <div className="col">
+        <div className="row">
+          <h4>{course && course.title}</h4>
+          {!isRegistered && <button type="submit" className="btn btn-danger" onClick={handleClick}>Start the Course!</button>}
+          {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course</button>}
+        </div>
+        
+          {course && courseDes(course.description)}
+        </div>
+        
+        {/* <img 
+          src="https://cdn.pixabay.com/photo/2016/11/29/09/14/walking-1868652_960_720.jpg"
+          width="25%"
+          alt="walk" /> */}
+      </div>
       <SignupLoginModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} />
       <AdminModal modalIsOpen={adminModalShow} setModalIsOpen={setAdminModalShow} />
       {course && props.state.token &&

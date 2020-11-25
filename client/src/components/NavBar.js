@@ -15,7 +15,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-warning">
+    <nav className="navbar navbar-expand-lg bg-warning mb-4">
 
       <ul className="navbar-nav d-flex flex-row justify-content-between">
         <li><Link className="nav-link" to="/">Home</Link></li>
