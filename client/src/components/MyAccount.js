@@ -6,36 +6,41 @@ import {
   Route
 } from 'react-router-dom';
 
+import UserCourses from 'components/UserCourses';
 
-const MyAccount = () => {
+
+const MyAccount = (props) => {
+
+  const courses = props.state.courses;
+  const userId = props.state.token.userId;
 
   const {path, url} = useRouteMatch();
 
   return(
     <div>
-      <aside>
-        <ul>
-          <li>
+      <div  className="container">
+        <ul className="row bg-light" style={{listStyleType: 'none'}}>
+          <li className="col-sm">
             <Link to={`${url}/profile`}>Edit profile</Link>
           </li>
-          <li>
+          <li className="col-sm">
             <Link to={`${url}/courses`}>Enrolled courses</Link>
           </li>
-          <li>
+          <li className="col-sm">
             <Link to={`${url}/subscriptions`}>Manage Subscription</Link>
           </li>
-          <li>
+          <li className="col-sm">
             <Link to={`${url}/invoices`}>My invoices</Link>
           </li>
-        </ul>
-      </aside>
+      </ul>
+      </div>
 
       <Switch>
         <Route exact path={path}>
           <h3>Welcome to your account!!</h3>
         </Route>
         <Route exact path={`${path}/courses`}>
-          <h3>A list of enrolled courses</h3>
+          <UserCourses userId={userId} courses={courses} />
         </Route>
         <Route exact path={`${path}/subscriptions`}>
           <h3>A list of subscriptions</h3>
