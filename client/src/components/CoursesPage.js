@@ -11,7 +11,7 @@ const CoursesPage = (props) => {
     const price = course.price;
     const subscription = course.subscription_based;
     if (price) {
-      tag = tag + '$' + price;
+      tag = tag + '$' + (price / 1000);
     }
     if (subscription) {
       tag += ' Series';

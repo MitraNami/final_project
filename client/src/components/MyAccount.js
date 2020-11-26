@@ -27,9 +27,6 @@ const MyAccount = (props) => {
             <Link to={`${url}/courses`}>Enrolled courses</Link>
           </li>
           <li className="col-sm">
-            <Link to={`${url}/subscriptions`}>Manage Subscription</Link>
-          </li>
-          <li className="col-sm">
             <Link to={`${url}/invoices`}>My invoices</Link>
           </li>
       </ul>
@@ -41,9 +38,6 @@ const MyAccount = (props) => {
         </Route>
         <Route exact path={`${path}/courses`}>
           <UserCourses userId={userId} courses={courses} />
-        </Route>
-        <Route exact path={`${path}/subscriptions`}>
-          <h3>A list of subscriptions</h3>
         </Route>
 
       </Switch>
