@@ -74,13 +74,19 @@ const CoursePage = (props) => {
 
 
   return (
-    <div>
-      Content of course with id: {courseId}
+    <div className="container">
+
+      <h4>{course && course.title}</h4>
 
       {/* we should see one of these buttons if the course is subscription based */}
       {subscriptionBased && <>
-        {!isSubscriptionActive && <button onClick={handleSubscription}>Subscribe!</button>}
-        {isSubscriptionActive && <button onClick={handleCancellation}>Cancel subscription!</button>}
+        <div className="container border p-2 bg-dark text-center rounded">
+          <span className="text-white pr-2">You can subscribe to this series to receive fitness vidoes and choreography
+          notes on their release.<br />Cancel your subscription at anytime.
+          </span>
+          {!isSubscriptionActive && <button className="btn btn-danger rounded" onClick={handleSubscription}>Subscribe!</button>}
+          {isSubscriptionActive && <button className="btn btn-primary rounded" onClick={handleCancellation}>Cancel subscription</button>}
+        </div>
         <CancelSubModal
           modalIsOpen={cancelSubModalShow}
           setModalIsOpen={setCancelSubModalShow}
@@ -97,8 +103,10 @@ const CoursePage = (props) => {
           setSubscription={setSubscription}
         />
       </>}
-
-      {LessonsList}
+      
+      <div className="d-flex flex-column-reverse">
+        {LessonsList}
+      </div>
 
     </div>
   );
