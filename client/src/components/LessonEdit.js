@@ -45,7 +45,7 @@ export default function LessonEdit() {
             <div className="input-group mb-3">
               <ReactQuill
                 theme="snow"
-                value={lesson.description}
+                defaultValue={lesson.description}
                 modules={modules}
                 formats={formats}
                 onChange={handleDescriptionChange}

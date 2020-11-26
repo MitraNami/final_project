@@ -78,7 +78,7 @@ export default function CourseEdit(props) {
               <input className="form-control"
                 name="price"
                 type="number"
-                value={course.price/100}
+                value={course.price / 100}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
@@ -145,7 +145,7 @@ export default function CourseEdit(props) {
   function handleInputChange(event) {
     const target = event.target;
     let value = target.type === 'checkbox' ? target.checked : target.value;
-    if (target.name === 'price') value = parseInt(value)*100;
+    if (target.name === 'price') value = parseInt(value) * 100;
     setCourse({
       ...course,
       [target.name]: value
