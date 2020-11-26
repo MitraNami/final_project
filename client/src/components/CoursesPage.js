@@ -22,7 +22,7 @@ const CoursesPage = (props) => {
         <div className="card-body">
           <p className="card-text">{course.title} <br />{tag}</p>
 
-          <Link className="card-link" key={course.id} to={`${url}/${course.id}/home`}>Read More</Link>
+          <Link className="card-link" to={`${url}/${course.id}/home`}>Read More</Link>
 
         </div>
       </div>

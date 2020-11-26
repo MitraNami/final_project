@@ -34,7 +34,7 @@ const Navbar = (props) => {
     // </nav>
     
 
-    <nav className="navbar navbar-expand-md navbar-light bg-light mb-4" >
+    <nav className="navbar navbar-expand-md navbar-light bg-light mb-4 sticky-top" >
       <span className="navbar-brand">StrongerU</span>
       <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span className="navbar-toggler-icon"></span>
