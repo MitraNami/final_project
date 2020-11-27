@@ -74,7 +74,7 @@ const CoursePage = (props) => {
 
 
   return (
-    <div className="container">
+    <div className="container mb-5">
 
       <h4>{course && course.title}</h4>
 
