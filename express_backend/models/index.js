@@ -122,6 +122,20 @@ module.exports = (db, bcrypt) => {
       .catch(err => err);
   };
 
+  const editRegistration = (r) => {
+    const query = {
+      text: `UPDATE registrations SET (start_date, user_id, course_id)
+             = ($1, $2, $3)
+             WHERE id = $4
+             RETURNING *`,
+      values: [r.start_date, r.user_id, r.course_id, r.id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
   const getLessonsByCourseId = courseId => {
     const query = {
       text: `SELECT * FROM lessons WHERE course_id = $1`,
@@ -247,6 +261,7 @@ module.exports = (db, bcrypt) => {
     deleteCourse,
     getRegistrations,
     addRegistration,
+    editRegistration,
     getLessonsByCourseId,
     getLessonById,
     addSubscription,
