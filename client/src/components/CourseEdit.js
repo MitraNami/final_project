@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { ADD_COURSE, EDIT_COURSE } from '../reducers/dataReducer';
+import { ADD_COURSE, EDIT_COURSE } from 'reducers/dataReducer';
 import { useHistory, useParams } from 'react-router-dom';
-import { getCourseById } from '../helpers/selectors';
+import { getCourseById } from 'helpers/selectors';
 import { Link, useRouteMatch } from 'react-router-dom';
 import useContentData from 'hooks/useContentData';
-import LessonList from './LessonList';
 import { modules, formats } from 'helpers/quill'
+import LessonList from 'components/LessonList';
+import UserList from 'components/UserList';
+import useRegistrationData from 'hooks/useRegistrationData';
 
 export default function CourseEdit(props) {
 
@@ -25,7 +27,10 @@ export default function CourseEdit(props) {
       authorized: false
     });
   const { lessons, deleteLesson } = useContentData(courseId);
+  const { registrations } = useRegistrationData();
   const { url } = useRouteMatch();
+
+  let registeredUserIds = new Set(registrations.filter(r => r.course_id === Number(courseId)).map(r => r.user_id));
 
   return (
     <section className="courseEdit">
@@ -136,6 +141,11 @@ export default function CourseEdit(props) {
             <div className="col">
               <Link className="btn btn-primary" to={`${url}/lesson/new`}>Add lesson</Link>
             </div>
+
+            <div className="row">
+              <h4>Registered Users</h4>
+            </div>
+            <UserList users={props.state.users.filter(u => registeredUserIds.has(u.id))}/>
           </>
         )}
       </div>

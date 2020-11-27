@@ -46,11 +46,21 @@ const replaceSubscription = (subscriptions, update, id) => {
   return subscriptions;
 };
 
+const getUserById = (userId, users) => {
+  return users.find(user => user.id === Number(userId));
+};
+
+const getRegistrationsByUserId = (userId, registrations) => {
+  return registrations.filter(registration => registration.user_id === Number(userId));
+};
+
 
 export {
   isRegisteredForACourse,
   getCourseById,
   isActiveSubscriber,
   getLessonById,
-  replaceSubscription
+  replaceSubscription,
+  getUserById,
+  getRegistrationsByUserId
 };
