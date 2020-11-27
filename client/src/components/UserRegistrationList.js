@@ -10,6 +10,7 @@ export default function UserRegistrationList(props) {
       user={getUserById(registration.user_id, props.state.users)}
       course={getCourseById(registration.course_id, props.state.courses)}
       registration={registration}
+      updateRegistration={props.updateRegistration}
     />);
 
   return (<>
