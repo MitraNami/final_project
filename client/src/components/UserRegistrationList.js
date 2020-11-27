@@ -9,7 +9,21 @@ export default function UserRegistrationList(props) {
       key={registration.id}
       user={getUserById(registration.user_id, props.state.users)}
       course={getCourseById(registration.course_id, props.state.courses)}
+      registration={registration}
     />);
 
-  return (<>{registrationList && (registrationList.length ? registrationList : 'None')}</>);
-};
+  return (<>
+    {registrationList && (<>
+      {!registrationList.length && 'None'}
+      {registrationList.length > 0 && (<>
+        <div className="row">
+          <div className="col"><strong>Course</strong></div>
+          <div className="col-2"><strong>Started</strong></div>
+          <div className="col-2"><strong>Completed</strong></div>
+          <div className="col-1"></div>
+        </div>
+        {registrationList}
+      </>)}
+    </>)}
+  </>);
+}

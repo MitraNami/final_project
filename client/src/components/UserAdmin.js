@@ -35,7 +35,7 @@ export default function UserAdmin(props) {
           </div>
           {userRegistrations && (<>
             <div className="row">
-              <h5>Registered Courses</h5>
+              <h5>Course Registrations</h5>
             </div>
             <UserRegistrationList state={props.state} registrations={userRegistrations} />
           </>)}
