@@ -33,14 +33,7 @@ module.exports = ({
   });
 
   router.put('/:id', (req, res) => {
-    const course = {
-      id: req.params.id,
-      title,
-      description,
-      subscription_based,
-      price,
-      authorized
-    } = req.body;
+    const course = { ...req.body, id: req.params.id };
 
     editCourse(course)
       .then(updatedCourse => res.json(updatedCourse))

@@ -7,7 +7,7 @@ import { getUserById, getRegistrationsByUserId } from "helpers/selectors"
 export default function UserAdmin(props) {
 
   const { userId } = useParams();
-  const { registrations } = useRegistrationData();
+  const { registrations, updateRegistration } = useRegistrationData();
   const user = getUserById(userId, props.state.users);
   const userRegistrations = user && registrations && getRegistrationsByUserId(userId, registrations);
 
@@ -35,9 +35,9 @@ export default function UserAdmin(props) {
           </div>
           {userRegistrations && (<>
             <div className="row">
-              <h5>Registered Courses</h5>
+              <h5>Course Registrations</h5>
             </div>
-            <UserRegistrationList state={props.state} registrations={userRegistrations} />
+            <UserRegistrationList state={props.state} registrations={userRegistrations} updateRegistration={updateRegistration} />
           </>)}
         </div>
       </section>

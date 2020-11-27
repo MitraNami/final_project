@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useRegistrationData = () => {
@@ -10,34 +10,43 @@ const useRegistrationData = () => {
     redirectToContent: false,
   });
 
-  const setModalShow = (show) => setState(prev => ({...prev, modalShow: show}));
-  const setAdminModalShow = (show) => setState(prev => ({...prev, adminModalShow: show}));
-  const setRedirectToContent = (redirect) => setState(prev => ({...prev, redirectToContent: redirect}));
-  const setPaymentModalShow = (show) => setState(prev => ({...prev, paymentModalShow: show}));
+  const setModalShow = (show) => setState(prev => ({ ...prev, modalShow: show }));
+  const setAdminModalShow = (show) => setState(prev => ({ ...prev, adminModalShow: show }));
+  const setRedirectToContent = (redirect) => setState(prev => ({ ...prev, redirectToContent: redirect }));
+  const setPaymentModalShow = (show) => setState(prev => ({ ...prev, paymentModalShow: show }));
 
   useEffect(() => {
-      axios.get('/api/users/registrations')
-        .then(result  => {
-          const registrations = result.data;
-          setState(prev => ({...prev, registrations}));
-    })
+    axios.get('/api/users/registrations')
+      .then(result => {
+        const registrations = result.data;
+        setState(prev => ({ ...prev, registrations }));
+      })
   }, []);
 
 
 
-// it will send a register request to the database
-//for a given user and course
+  // it will send a register request to the database
+  //for a given user and course
   const registerUser = (userId, courseId) => {
     return axios.post('/api/users/registrations', {
       start_date: new Date(),
       user_id: userId,
       course_id: Number(courseId)
     })
-    .then(result => {
-      //successful registraiton update the state registrations
-      const newRegistration = result.data;
-      setState(prev => ({...prev, registrations: [...prev.registrations, newRegistration]}));
-    })
+      .then(result => {
+        //successful registraiton update the state registrations
+        const newRegistration = result.data;
+        setState(prev => ({ ...prev, registrations: [...prev.registrations, newRegistration] }));
+      });
+  };
+
+  const updateRegistration = (registration) => {
+    return axios.put(`/api/users/registrations/${registration.id}`, registration)
+      .then(res =>
+        setState(prev => ({
+          ...prev,
+          registrations: prev.registrations.map(r => r.id === res.data.id ? res.data : r)
+        })));
   };
 
   const registrations = state.registrations;
@@ -56,7 +65,8 @@ const useRegistrationData = () => {
     paymentModalShow,
     setPaymentModalShow,
     redirectToContent,
-    setRedirectToContent
+    setRedirectToContent,
+    updateRegistration
   }
 };
 
