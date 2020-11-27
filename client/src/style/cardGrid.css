@@ -1,0 +1,8 @@
+
+/* show one card in a row when width is smaller than 800px */
+@media only screen and (max-width: 800px) {
+  #grid {
+    min-width: 400px;
+    font-weight: bold;
+  }
+}
