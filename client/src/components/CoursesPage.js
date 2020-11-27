@@ -1,6 +1,7 @@
-
 import { Link, useRouteMatch } from 'react-router-dom';
 
+import makeCardGrid from '../helpers/cardGrid';
+import '../style/cardGrid.css';
 
 const CoursesPage = (props) => {
 
@@ -18,7 +19,7 @@ const CoursesPage = (props) => {
     }
     
     return (
-      <div className="card border border-dark m-2" key={course.id}>
+      <div id="grid" className="card border border-dark m-2 col" key={course.id}>
         <div className="card-body">
           <p className="card-text">{course.title} <br />{tag}</p>
 
@@ -26,34 +27,29 @@ const CoursesPage = (props) => {
 
         </div>
       </div>
-      
-      // <Link key={course.id} to={`${url}/${course.id}/home`}>
-      //   <Course
-      //     title={course.title}
-      //     description={course.description}
-      //     subscription_based={course.subscription_based} />
-      // </Link>
     );
   });
 
+  //Arrange each course card in rows of three
+  const gridCourses = makeCardGrid(courses);
+
+  //Center the picture, adjuct the size with respect to view port
   const myStyle = {
-    
     width: 'auto',
     height: 'auto',
     maxWidth: '100%',
     maxHeight: '90vh',
     display: 'block',
     margin: '0 auto'
-
   };
   
   return (
-    <div className="">
+    <div className="mb-5">
       
       <img style={myStyle} src="https://res.cloudinary.com/dxc1pdflu/image/upload/v1606336861/samples/SeniorYoga_cryk0v.png" alt="senior yoga" />
       
-      <div className="card-group container p-2 mt-2">
-        {courses}
+      <div className="container p-2 mt-2">
+        {gridCourses}
       </div>
 
     </div>
