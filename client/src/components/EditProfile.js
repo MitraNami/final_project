@@ -5,7 +5,7 @@ import {getUserById} from '../helpers/selectors';
 const EditProfile = (props) => {
 
   const {userId, users} = props;
-  const user = getUserById(users, userId);
+  const user = getUserById(userId, users);
   console.log(users);
 
   const [state, setState] = useState({
