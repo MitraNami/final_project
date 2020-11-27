@@ -10,6 +10,7 @@ module.exports = ({
   getUsersPosts,
   getRegistrations,
   addRegistration,
+  editRegistration,
   bcrypt
 }) => {
   /* GET users listing. */
