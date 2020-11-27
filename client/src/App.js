@@ -14,6 +14,7 @@ import CoursePage from './components/CoursePage'
 import CourseEdit from 'components/CourseEdit';
 import LessonEdit from 'components/LessonEdit';
 import MyAccount from 'components/MyAccount';
+import Contact from 'components/Contact';
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home />
+          </Route>
+          <Route exact path='/contact'>
+            <Contact />
           </Route>
           <Route exact path='/courses'>
             <CoursesPage courses={state.courses} />
