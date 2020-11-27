@@ -117,12 +117,7 @@ module.exports = ({
   });
 
   router.put('/registrations/:id', (req, res) => {
-    const registration = {
-      id: req.params.id,
-      start_date,
-      user_id,
-      course_id
-    } = req.body;
+    const registration = { ...req.body, id: req.params.id };
 
     editRegistration(registration)
       .then(updatedRegistration => res.json(updatedRegistration))

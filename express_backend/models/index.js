@@ -124,11 +124,11 @@ module.exports = (db, bcrypt) => {
 
   const editRegistration = (r) => {
     const query = {
-      text: `UPDATE registrations SET (start_date, user_id, course_id)
-             = ($1, $2, $3)
-             WHERE id = $4
+      text: `UPDATE registrations SET (start_date, end_date, user_id, course_id)
+             = ($1, $2, $3, $4)
+             WHERE id = $5
              RETURNING *`,
-      values: [r.start_date, r.user_id, r.course_id, r.id]
+      values: [r.start_date, r.end_date, r.user_id, r.course_id, r.id]
     }
 
     return db.query(query)
