@@ -46,11 +46,16 @@ const replaceSubscription = (subscriptions, update, id) => {
   return subscriptions;
 };
 
+const getUserById = (users, userId) => {
+  return users.find(user => user.id === userId);
+};
+
 
 export {
   isRegisteredForACourse,
   getCourseById,
   isActiveSubscriber,
   getLessonById,
-  replaceSubscription
+  replaceSubscription,
+  getUserById
 };
