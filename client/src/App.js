@@ -66,7 +66,7 @@ function App() {
             <LessonEdit />
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );
