@@ -4,11 +4,11 @@ var router = express.Router();
 const nodemailer = require("nodemailer");
 
 const contactEmail = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: process.env.NODEMAILER_HOST,
   port: 587,
   auth: {
-    user: "a.mxnami@gmail.com",
-    pass: "password",
+    user: process.env.NODEMAILER_USER,
+    pass: process.env.NODEMAILER_PASS,
   },
 });
 
