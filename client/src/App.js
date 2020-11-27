@@ -17,6 +17,7 @@ import MyAccount from 'components/MyAccount';
 import Contact from 'components/Contact';
 import Footer from 'components/Footer';
 import UserAdmin from 'components/UserAdmin';
+import UserAdminRegister from 'components/UserAdminRegister';
 
 function App() {
 
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route exact path='/admin/account/courses/:courseId/lesson/:lessonId'> {/*make it a private route*/}
             <LessonEdit />
+          </Route>
+          <Route exact path='/admin/account/users/:userId/register'> {/*make it a private route*/}
+            <UserAdminRegister state={state} />
           </Route>
           <Route exact path='/admin/account/users/:userId'> {/*make it a private route*/}
             <UserAdmin state={state} />
