@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bcrypt = require('bcrypt');
 
+//allows for cross origin resource sharing between the frontend and the server
+const cors = require("cors");
+
 const db = require('./db');
 const dbHelpers = require('./models/index')(db, bcrypt);
 const indexRouter = require('./routes/index');
@@ -12,8 +15,11 @@ const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
 const lessonRouter = require('./routes/lessons');
 const subscriptionsRouter = require('./routes/subscriptions');
+const contactRouter = require('./routes/contact');
 
 const app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +36,7 @@ app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/courses', coursesRouter(dbHelpers));
 app.use('/api/lessons', lessonRouter(dbHelpers));
 app.use('/api/subscriptions', subscriptionsRouter(dbHelpers));
+app.use('/api/contact', contactRouter);
 
 
 // catch 404 and forward to error handler
