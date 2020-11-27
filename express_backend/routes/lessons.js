@@ -37,6 +37,7 @@ module.exports = ({
 
   router.put('/:id', (req, res) => {
     const lesson = {
+      id: req.params.id,
       title,
       description,
       release_date,
