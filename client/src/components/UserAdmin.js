@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import useRegistrationData from 'hooks/useRegistrationData';
 import UserRegistrationList from "components/UserRegistrationList";
 import { getUserById, getRegistrationsByUserId } from "helpers/selectors"
+import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function UserAdmin(props) {
 
@@ -10,6 +11,7 @@ export default function UserAdmin(props) {
   const { registrations, updateRegistration } = useRegistrationData();
   const user = getUserById(userId, props.state.users);
   const userRegistrations = user && registrations && getRegistrationsByUserId(userId, registrations);
+  const { url } = useRouteMatch();
 
   return (<>
     { user &&
@@ -38,6 +40,9 @@ export default function UserAdmin(props) {
               <h5>Course Registrations</h5>
             </div>
             <UserRegistrationList state={props.state} registrations={userRegistrations} updateRegistration={updateRegistration} />
+            <div className="row">
+              <Link className="btn btn-primary" to={`${url}/register`}>Add registration</Link>
+            </div>
           </>)}
         </div>
       </section>

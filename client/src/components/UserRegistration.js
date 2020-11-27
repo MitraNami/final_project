@@ -21,7 +21,7 @@ export default function UserRegistration(props) {
       <div className="col-1">
         {!props.registration.end_date && (
           <div className="col-1">
-            <button type="submit" className="btn btn-primary" onClick={complete}>Complete</button>
+            <button type="submit" className="btn btn-primary" onClick={complete}>Certify</button>
           </div>
         )}
       </div>
