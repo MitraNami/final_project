@@ -15,6 +15,7 @@ import CourseEdit from 'components/CourseEdit';
 import LessonEdit from 'components/LessonEdit';
 import MyAccount from 'components/MyAccount';
 import Contact from 'components/Contact';
+import Footer from 'components/Footer';
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
             <LessonEdit />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

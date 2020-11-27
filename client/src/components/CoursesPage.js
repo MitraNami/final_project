@@ -48,7 +48,7 @@ const CoursesPage = (props) => {
   };
   
   return (
-    <div className="">
+    <div className="mb-5">
       
       <img style={myStyle} src="https://res.cloudinary.com/dxc1pdflu/image/upload/v1606336861/samples/SeniorYoga_cryk0v.png" alt="senior yoga" />
       
