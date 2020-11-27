@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
 import axios from 'axios';
+import Modal from 'react-modal';
+
+import '../style/contact.css';
+
+Modal.setAppElement('#root');
 
 const Contact = () => {
 
@@ -8,36 +13,50 @@ const Contact = () => {
     name: '',
     email: '',
     msg: '',
-    status: 'Submit'
+    status: 'Submit',
+    modalShow: false,
+    sent: false
   });
+
+  const setModalShow = show => setState(prev => ({ ...prev, modalShow: show }));
+  const setSent = sent => setState(prev => ({...prev, sent}));
 
   const handleChange = (evt) => {
     setState(prev => ({ ...prev, [evt.target.name]: evt.target.value }));
   };
 
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setState(prev => ({...prev, status: 'Sending'}));
+    setState(prev => ({ ...prev, status: 'Sending' }));
 
-    axios.post('/contact', {
-      ...state
+    axios.post('/api/contact', {
+      name: state.name,
+      email: state.email,
+      msg: state.msg
     })
-    .then(result => {
-      if (result.data.status === "sent") {
-        alert("Message Sent");
-        setState(prev => ({name: '', email: '', msg: '', status: 'Submit'}));
-      } else if (result.data.status === "failed") {
-        alert("Message Failed")
-      }
+      .then(result => {
+        if (result.data.status === "sent") {
+          setSent(true);
+        } else if (result.data.status === "failed") {
+          setSent(false);
+        }
+        setModalShow(true);
       
-    })
-    .catch(error => console.log(error, 'did not contact successfully'));
+      })
+      .catch(error => console.log(error, 'did not contact successfully'));
   };
+
+  const reset = () => {
+    setState(prev => ({ name: '', email: '', msg: '', status: 'Submit' }));
+  };
+
+  
 
   return (
 
-    <div className="container">
-      <form onSubmit={handleSubmit}>
+    <div className="container border border-dark p-2">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input id="name" className="form-control" type="text" name="name" value={state.name} onChange={handleChange} required />
@@ -52,8 +71,27 @@ const Contact = () => {
         </div>
         <button type="submit">{state.status}</button>
       </form>
-    </div>
+
     
+      <Modal
+        className="Modal"
+        overlayClassName="Overlay"
+        isOpen={state.modalShow}
+      >
+        <div className="d-flex flex-column justify-content-center">
+          <p className="text-center">
+            {state.sent ? "Message Sent" : "Message Failed"}
+          </p>
+          <div className="d-flex justify-content-center">
+          <button className="btn btn-sm btn-dark" onClick={reset}>OK</button>
+          </div>
+        </div>
+      </Modal>
+
+
+
+    </div>
+
   );
 
 };
