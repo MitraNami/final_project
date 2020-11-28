@@ -6,6 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 
+import MyAccountHome from 'components/MyAccountHome';
 import UserCourses from 'components/UserCourses';
 import EditProfile from 'components/EditProfile';
 
@@ -36,7 +37,7 @@ const MyAccount = (props) => {
 
       <Switch>
         <Route exact path={path}>
-          <h3>Welcome to your account!!</h3>
+          <MyAccountHome courses={courses} />
         </Route>
         <Route exact path={`${path}/courses`}>
           <UserCourses userId={userId} courses={courses} />
