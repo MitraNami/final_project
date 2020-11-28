@@ -10,6 +10,7 @@ module.exports = ({
   getUsersPosts,
   getRegistrations,
   addRegistration,
+  updateUser,
   bcrypt
 }) => {
   /* GET users listing. */
@@ -115,5 +116,23 @@ module.exports = ({
 
   });
 
+
+  router.put('/', (req, res) => {
+
+    const {
+      id,
+      first_name,
+      last_name,
+      password
+    } = req.body;
+
+    updateUser(first_name, last_name, password, id)
+      .then(updatedUser => {
+        res.json(updatedUser);
+      })
+      .catch(err => console.log(`Error: ${err.message}`))  
+  });
+
+  
   return router;
 };
