@@ -36,7 +36,7 @@ module.exports = (db, bcrypt) => {
           .then(result => result.rows[0])
           .catch(err => console.log(err.message));
       });
-  }
+  };
 
   const getUsersPosts = () => {
     const query = {
@@ -151,10 +151,10 @@ module.exports = (db, bcrypt) => {
       text: `INSERT INTO subscriptions (user_id, course_id, start_date, end_date) VALUES ($1, $2, $3, $4) RETURNING *`,
       values: [userId, courseId, startDate, endDate]
     }
-    : {
-      text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
-      values: [userId, courseId]
-    }
+      : {
+        text: `INSERT INTO subscriptions (user_id, course_id) VALUES ($1, $2) RETURNING *`,
+        values: [userId, courseId]
+      }
 
     return db
       .query(query)
@@ -231,10 +231,30 @@ module.exports = (db, bcrypt) => {
     };
 
     return db.query(query)
-    .then(result => result.rows[0])
-    .catch(err => err);
+      .then(result => result.rows[0])
+      .catch(err => err);
   };
 
+  const updateUser = (firstName, lastName, password, id) => {
+    //hash the password before storing them in database
+    //don't change the password if a new one is not provided
+    return bcrypt.hash(password, 10)
+      .then(hash => {
+        const query = (password === '') ?
+        {
+          text: `UPDATE users SET (first_name, last_name) = ($1, $2) WHERE id = $3 RETURNING  *`,
+          values: [firstName, lastName, id]
+        }
+        : {
+          text: `UPDATE users SET (first_name, last_name , password) = ($1, $2, $3) WHERE id = $4 RETURNING  *`,
+          values: [firstName, lastName, hash, id]
+        }
+
+        return db.query(query)
+          .then(result => result.rows[0])
+          .catch(err => console.log(err.message));
+      });
+  };
 
   return {
     getUsers,
@@ -256,6 +276,7 @@ module.exports = (db, bcrypt) => {
     deleteLesson,
     deleteLessonsForCourse,
     endSubscription,
+    updateUser,
     bcrypt
   };
 };
