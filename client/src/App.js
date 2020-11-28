@@ -49,7 +49,7 @@ function App() {
             <Signup dispatch={dispatch} />
           </Route>
           <Route path='/users/account'> {/*make it a private route*/}
-            <MyAccount state={state} />
+            <MyAccount state={state} dispatch={dispatch} />
           </Route>
           <Route exact path='/admin/account'> {/*make it a private route*/}
             <Admin state={state} dispatch={dispatch} />
