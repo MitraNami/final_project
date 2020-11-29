@@ -1,6 +1,8 @@
 import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
 
+import '../style/modal.css';
+
 Modal.setAppElement('#root');
 
 const SignupLoginModal = (props) => {
@@ -19,34 +21,19 @@ const SignupLoginModal = (props) => {
   return (
     
       <Modal 
+        className="CredentialModal"
+        overlayClassName="Overlay"
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        style={
-          {
-            overlay: {
-              backgroundColor: '#D3D3D3E6'
-            },
-            content: {
-              color: 'black',
-              top: '20%',
-              left: '35%',
-              width: '30%',
-              height: '40%',
-              backgroundColor: '#ff99cc',
-              border: 'black solid 3px',
-              borderRadius: '15px 50px 30px'
-            }
-          }
-        }
         >
-        <h4>You need to login or signup first:</h4>
+        <p className="text-center pt-1">You need to login or signup first:</p>
         <br />
         <div className="container d-flex flex-column">
-          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={handleLogin}>Login</button>
+          <button className="btn btn-outline-dark btn-sm" type="submit" onClick={handleLogin}>Login</button>
           <br />
-          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={handleSignup}>Signup</button>
+          <button className="btn btn-outline-dark btn-sm" type="submit" onClick={handleSignup}>Signup</button>
           <br />
-          <button className="btn btn-outline-dark btn-lg" type="submit" onClick={() => setModalIsOpen(false)}>Cancel</button>
+          <button className="btn btn-outline-dark btn-sm" type="submit" onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
       
       </Modal>

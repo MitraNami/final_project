@@ -1,12 +1,13 @@
 import Modal from 'react-modal';
 
+import '../style/modal.css';
+
 Modal.setAppElement('#root');
 
 const AdminModal = (props) => {
   const {modalIsOpen, setModalIsOpen} = props;
 
   const handleSendMsg = () => {
-    console.log('send msg to admin');
     setModalIsOpen(false);
   };
 
@@ -14,33 +15,18 @@ const AdminModal = (props) => {
   return (
 
     <Modal
+      className="AdminModal"
+      overlayClassName="Overlay"
       isOpen={modalIsOpen}
       onRequestClose={() => setModalIsOpen(false)}
-      style={
-        {
-          overlay: {
-            backgroundColor: '#D3D3D3E6'
-          },
-          content: {
-            color: 'black',
-            top: '20%',
-            left: '35%',
-            width: '30%',
-            height: '40%',
-            backgroundColor: '#ff99cc',
-            border: 'black solid 3px',
-            borderRadius: '15px 50px 30px'
-          }
-        }
-      }
+      
     >
-      <h4>You need to request registration. Do you want to send a request to
-      admin to be registered?
-      </h4>
-      <br />
+      <p className="text-center">
+        Do you want to send a request to admin to be registered in this course?
+      </p>
       <div className="container d-flex flex-row justify-content-around">
-        <button className="btn btn-outline-dark btn-lg" type="submit" onClick={handleSendMsg}>OK</button>
-        <button className="btn btn-outline-dark btn-lg" type="submit" onClick={() => setModalIsOpen(false)}>Cancel</button>
+        <button className="btn btn-outline-dark btn-sm" type="submit" onClick={handleSendMsg}>OK</button>
+        <button className="btn btn-outline-dark btn-sm" type="submit" onClick={() => setModalIsOpen(false)}>Cancel</button>
       </div>
     </Modal>
 

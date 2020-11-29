@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import '../style/contact.css';
+import '../style/modal.css';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { getUserById, replaceUser } from '../helpers/selectors';
