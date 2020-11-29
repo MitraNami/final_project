@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import '../style/contact.css';
+import Modal from 'react-modal';
 import axios from 'axios';
 import { getUserById, replaceUser } from '../helpers/selectors';
 import { SET_USERS } from 'reducers/dataReducer';
@@ -15,8 +17,12 @@ const EditProfile = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
-    error: false
+    error: false,
+    status: 'Submit',
+    modalShow: false,
   });
+
+  const setModalShow = show => setState(prev => ({ ...prev, modalShow: show }));
 
   //set up the initial values in the form once user is defined
   useEffect(() => {
@@ -45,6 +51,7 @@ const EditProfile = (props) => {
 
   const handleSubmission = evt => {
     evt.preventDefault();
+    setState(prev => ({ ...prev, status: 'Sending' }));
     if (checkEqualPasswords()) { //in case the user submits while still in the last field
       axios.put('/api/users', {
         id: userId,
@@ -56,8 +63,8 @@ const EditProfile = (props) => {
           //update the users state
           const updatedUser = result.data;
           const updatedUsers = replaceUser([...users], updatedUser, userId);
-          //console.log(updatedUsers);
           dispatch({ type: SET_USERS, users: updatedUsers });
+          setModalShow(true)
         })
         .catch(err => console.log(err));
     }
@@ -94,9 +101,26 @@ const EditProfile = (props) => {
               *passwords don't match
             </small>}
         </div>
-
-        <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+        <button type="submit" className="btn btn-primary btn-lg btn-block">{state.status}</button>
       </form>
+
+      <Modal
+        className="Modal"
+        overlayClassName="Overlay"
+        isOpen={state.modalShow}
+      >
+        <div className="d-flex flex-column justify-content-center">
+          <p className="text-center">
+            Profile Updated
+          </p>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-sm btn-dark" onClick={() => {
+              setModalShow(false)
+              setState(prev => ({ ...prev, status: 'Submit' }));
+            }}>OK</button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 
