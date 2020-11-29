@@ -64,7 +64,7 @@ export default function CourseEdit(props) {
             <div className="input-group mb-3">
               <ReactQuill
                 theme="snow"
-                defaultValue={course.description}
+                value={course.description}
                 modules={modules}
                 formats={formats}
                 onChange={handleDescriptionChange}
