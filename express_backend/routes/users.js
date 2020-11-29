@@ -10,6 +10,7 @@ module.exports = ({
   getUsersPosts,
   getRegistrations,
   addRegistration,
+  updateUser,
   editRegistration,
   bcrypt
 }) => {
@@ -116,6 +117,24 @@ module.exports = ({
 
   });
 
+
+  router.put('/', (req, res) => {
+
+    const {
+      id,
+      first_name,
+      last_name,
+      password
+    } = req.body;
+
+    updateUser(first_name, last_name, password, id)
+      .then(updatedUser => {
+        res.json(updatedUser);
+      })
+      .catch(err => console.log(`Error: ${err.message}`))  
+  });
+
+  
   router.put('/registrations/:id', (req, res) => {
     const registration = { ...req.body, id: req.params.id };
 

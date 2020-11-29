@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 
-import '../style/contact.css';
+import '../style/modal.css';
 
 Modal.setAppElement('#root');
 

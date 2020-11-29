@@ -6,6 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 
+import MyAccountHome from 'components/MyAccountHome';
 import UserCourses from 'components/UserCourses';
 import EditProfile from 'components/EditProfile';
 
@@ -15,6 +16,7 @@ const MyAccount = (props) => {
   const courses = props.state.courses;
   const userId = props.state.token.userId;
   const users = props.state.users;
+  const dispatch = props.dispatch;
 
   const {path, url} = useRouteMatch();
 
@@ -36,13 +38,13 @@ const MyAccount = (props) => {
 
       <Switch>
         <Route exact path={path}>
-          <h3>Welcome to your account!!</h3>
+          <MyAccountHome courses={courses} />
         </Route>
         <Route exact path={`${path}/courses`}>
           <UserCourses userId={userId} courses={courses} />
         </Route>
-        <Route>
-          <EditProfile userId={userId} users={users} />
+        <Route exact path={`${path}/profile`}>
+          <EditProfile userId={userId} users={users} dispatch={dispatch} />
         </Route>
       </Switch>
     </div>

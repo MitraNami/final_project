@@ -1,4 +1,4 @@
-//returns true if the given user if registerd for the given coure, otherwise
+//returns true if the given user is registerd for the given coure, otherwise
 //returns false
 const isRegisteredForACourse = (userId, courseId, registraions) => {
   for (const registraion of registraions) {
@@ -54,6 +54,18 @@ const getRegistrationsByUserId = (userId, registrations) => {
   return registrations.filter(registration => registration.user_id === Number(userId));
 };
 
+//returns the users array with one of its items whose
+//id is id replaced with update
+const replaceUser = (users, update, id) => {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].id === id) {
+      users.splice(i, 1, update);
+      break;
+    }
+  }
+  return users;
+};
+
 
 export {
   isRegisteredForACourse,
@@ -62,5 +74,6 @@ export {
   getLessonById,
   replaceSubscription,
   getUserById,
-  getRegistrationsByUserId
+  getRegistrationsByUserId,
+  replaceUser
 };

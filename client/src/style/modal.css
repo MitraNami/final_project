@@ -1,0 +1,102 @@
+/* for modals in EditProfile and Contact components */
+.Modal {
+  position: absolute;
+  color: black;
+  top: 20%;
+  left: 35%;
+  width: 20%;
+  height: 15%;
+  background-color: #ff99cc;
+  border: black solid 3px;
+  border-radius: 15px;
+}
+
+/* for modals in PaymentModal and SubscriptionModal components */
+.Paymentmodal {
+  position: absolute;
+  color: black;
+  top: 20%;
+  left: 35%;
+  width: 20%;
+  height: 40%;
+  background-color: #ff99cc;
+  border: black solid 3px;
+  border-radius: 15px;
+}
+
+/* for modal in AdminModal component */
+.AdminModal {
+  position: absolute;
+  color: black;
+  top: 20%;
+  left: 35%;
+  width: 30%;
+  height: 15%;
+  background-color: #ff99cc;
+  border: black solid 3px;
+  border-radius: 15px;
+}
+
+/* for modal in CancelSubModal component */
+.CancelSub {
+  position: absolute;
+  color: black;
+  top: 20%;
+  left: 35%;
+  width: 30%;
+  height: 20%;
+  background-color: #ff99cc;
+  border: black solid 3px;
+  border-radius: 15px;
+}
+
+/* for modal in CancelSubModal component */
+.CredentialModal {
+  position: absolute;
+  color: black;
+  top: 20%;
+  left: 35%;
+  width: 30%;
+  height: 30%;
+  background-color: #ff99cc;
+  border: black solid 3px;
+  border-radius: 15px;
+}
+
+
+/* for all Modals overlay */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #D3D3D3E6;
+}
+
+
+/* increase the width and height of the modals for smaller screens */
+@media only screen and (max-width: 600px) {
+
+  .Modal {
+    width: 35%;
+    height: 25%;
+  }
+  .Paymentmodal {
+    width: 45%;
+    height: 54%;
+  }
+  .CredentialModal {
+    width: 48%;
+    height: 50%;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+
+  .AdminModal, .CancelSub {
+    width: 45%;
+    height: 35%;
+  }
+
+}

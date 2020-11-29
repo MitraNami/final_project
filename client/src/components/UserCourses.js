@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
+import '../style/cardGrid.css';
 
 import useRegistraionDate from 'hooks/useRegistrationData';
 import {isRegisteredForACourse} from '../helpers/selectors';
-
+import makeCardGrid from '../helpers/cardGrid';
 
 const UserCourses = (props) => {
 
@@ -13,7 +14,7 @@ const UserCourses = (props) => {
     const courseId = course.id;
     if (isRegisteredForACourse(userId, courseId, registrations)) {
       acc.push(
-        <div className="card border" key={courseId}>
+        <div id="grid" className="card border border-dark m-2 col" key={courseId}>
           <div className="card-body">
             <p className="card-text">{course.title}</p>
             <Link className="card-link" to={`/courses/${courseId}/content`}>
@@ -26,9 +27,13 @@ const UserCourses = (props) => {
     return acc;
 
   }, []);
+
+    //Arrange course cards in rows of three
+    const gridCourses = makeCardGrid(coursesList);
+
   return (
     <div className="container p-2 mt-2">
-      {coursesList}
+      {gridCourses}
     </div>
 
   );

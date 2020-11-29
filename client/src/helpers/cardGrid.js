@@ -10,13 +10,14 @@ const makeCardGrid = courses => {
     for (let j = i; j < (i + 3); j++) {
       if (courses[j] === undefined) {
         row.push(
-        <div id="grid" style={{opacity: '0'}} key={len + 1} className="card col m-2">
+        <div id="grid" style={{opacity: '0'}} key={j + 1} className="card col m-2">
           An invisible card to complete a row that has fewer than three cards.
         </div>
         );
-        break;
+      } else {
+        row.push(courses[j]);
       }
-      row.push(courses[j]);
+      
     }
     gridCourses.push(
       <div key={i} className="row">
@@ -24,7 +25,6 @@ const makeCardGrid = courses => {
       </div>
     );
   }
-
   return gridCourses;
 };
 
