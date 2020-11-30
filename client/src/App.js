@@ -1,5 +1,4 @@
 
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import useApplicationData from 'hooks/useApplicationData';
 
@@ -74,7 +73,7 @@ function App() {
             <UserAdmin state={state} />
           </Route>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );
