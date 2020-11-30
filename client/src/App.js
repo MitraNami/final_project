@@ -17,6 +17,7 @@ import Contact from 'components/Contact';
 import Footer from 'components/Footer';
 import UserAdmin from 'components/UserAdmin';
 import UserAdminRegister from 'components/UserAdminRegister';
+import Logo from 'components/Logo';
 
 function App() {
 
@@ -72,6 +73,13 @@ function App() {
           <Route exact path='/admin/account/users/:userId'> {/*make it a private route*/}
             <UserAdmin state={state} />
           </Route>
+          <Route path="*">
+            <Logo />
+              <div className="container text-center">
+                <h1>Not Found</h1>
+                <p>Sorry, page not found!</p>
+              </div>
+        </Route>
         </Switch>
         <Footer />
       </Router>
