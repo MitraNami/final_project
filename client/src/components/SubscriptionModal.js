@@ -51,7 +51,7 @@ const SubscriptionModal = (props) => {
       overlayClassName="Overlay"
     >
       <div className="container">
-        <form onSubmit={handleSubscription} autoComplete="off">
+        <form onSubmit={handleSubscription} autoComplete="off" spellCheck="false">
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input id="name" className="form-control" type="text" name="name" value={state.name} onChange={handleChange} required/>

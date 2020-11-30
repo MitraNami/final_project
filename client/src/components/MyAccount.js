@@ -9,7 +9,7 @@ import {
 import MyAccountHome from 'components/MyAccountHome';
 import UserCourses from 'components/UserCourses';
 import EditProfile from 'components/EditProfile';
-
+import Logo from 'components/Logo';
 
 const MyAccount = (props) => {
 
@@ -22,7 +22,8 @@ const MyAccount = (props) => {
 
   return(
     <div>
-      <div  className="container">
+      <div className="container">
+        <Logo />
         <ul className="row bg-light" style={{listStyleType: 'none'}}>
           <li className="col-sm">
             <Link to={`${url}/profile`}>My profile</Link>

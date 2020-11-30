@@ -3,6 +3,8 @@ import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import { SET_TOKEN } from '../reducers/dataReducer';
 
+import Logo from 'components/Logo';
+
 const Signup = (props) => {
 
   const history = useHistory();
@@ -48,6 +50,7 @@ const Signup = (props) => {
 
   return (
     <div className="container p-5">
+      <Logo />
       <form onSubmit={handleSubmission}>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>

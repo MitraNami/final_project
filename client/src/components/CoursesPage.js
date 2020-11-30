@@ -2,6 +2,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 import makeCardGrid from '../helpers/cardGrid';
 import '../style/cardGrid.css';
+import '../style/logo.css';
 
 const CoursesPage = (props) => {
 
@@ -33,20 +34,10 @@ const CoursesPage = (props) => {
   //Arrange each course card in rows of three
   const gridCourses = makeCardGrid(courses);
 
-  //Center the picture, adjuct the size with respect to view port
-  const myStyle = {
-    width: 'auto',
-    height: 'auto',
-    maxWidth: '100%',
-    maxHeight: '90vh',
-    display: 'block',
-    margin: '0 auto'
-  };
-  
   return (
-    <div className="mb-5">
+    <div className="container">
       
-      <img style={myStyle} src="https://res.cloudinary.com/dxc1pdflu/image/upload/v1606336861/samples/SeniorYoga_cryk0v.png" alt="senior yoga" />
+      <img className="logo" src="https://res.cloudinary.com/dxc1pdflu/image/upload/v1606336861/samples/SeniorYoga_cryk0v.png" alt="senior yoga" />
       
       <div className="container p-2 mt-2">
         {gridCourses}

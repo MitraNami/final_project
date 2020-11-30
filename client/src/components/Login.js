@@ -3,6 +3,8 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { SET_TOKEN } from '../reducers/dataReducer';
 
+import Logo from 'components/Logo';
+
 
 const Login = (props) => {
 
@@ -46,7 +48,8 @@ const Login = (props) => {
    
     
       <div className="container p-5">
-        <form onSubmit={handleSubmission}>
+        <Logo />
+        <form onSubmit={handleSubmission} autoComplete="off">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input type="email" className="form-control" name="email" id="email" value={state.email} onChange={handleChange} required />

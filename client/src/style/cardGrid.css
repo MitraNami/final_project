@@ -1,8 +1,12 @@
 
+#grid:hover {
+  background-color: #f7c8e6;
+  box-shadow: 5px 10px #888888
+}
 /* show one card in a row when width is smaller than 800px */
 @media only screen and (max-width: 800px) {
   #grid {
-    min-width: 400px;
+    min-width: 80% ;
     font-weight: bold;
   }
 }
