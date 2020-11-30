@@ -24,9 +24,11 @@ const UserLesson = (props) => {
   
 
   return (
-    <div className="border border-dark rounded p-2 mt-3 mb-1">
+    <div className="container border border-dark rounded p-2 mt-3 mb-1">
       {/* if the user does not have access to the lesson, show them a buy now button */}
-      {!access && <button onClick={handlePurchase} className="btn btn-danger">Buy now!</button>} 
+      <div className="row justify-content-end pr-2">
+        {!access && <button onClick={handlePurchase} className="btn btn-danger">Buy now!</button>} 
+      </div>
       <h4>{lesson.title}</h4>
       {lessonDes(lesson.description)}
       <div className="m-1">
