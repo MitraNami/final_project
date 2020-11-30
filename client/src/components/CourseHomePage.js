@@ -6,20 +6,21 @@ import { isRegisteredForACourse, getCourseById } from '../helpers/selectors';
 import SignupLoginModal from 'components/SignupLoginModal';
 import AdminModal from 'components/AdminModal';
 import PaymentCourseModal from 'components/PaymentCourseModal';
+import Logo from 'components/Logo';
 
 
 const CourseHomePage = (props) => {
   const { courseId } = useParams();
 
-  const { 
-    registrations, 
-    registerUser, 
-    setModalShow, 
+  const {
+    registrations,
+    registerUser,
+    setModalShow,
     modalShow,
     paymentModalShow,
     setPaymentModalShow,
-    redirectToContent, 
-    setRedirectToContent, 
+    redirectToContent,
+    setRedirectToContent,
     adminModalShow,
     setAdminModalShow } = useRegistrationData();
 
@@ -64,45 +65,42 @@ const CourseHomePage = (props) => {
   };
 
   const createMarkup = msg => {
-    return {__html: `${msg}`};
+    return { __html: `${msg}` };
   };
-  
+
   const courseDes = msg => {
     return <div dangerouslySetInnerHTML={createMarkup(msg)} />;
   };
-  
 
+  
   return (
-    <div className="border container">
-      <div className="row justify-content-around">
-        <div className="col">
-        <div className="row">
-          <h4>{course && course.title}</h4>
-          {!isRegistered && <button type="submit" className="btn btn-danger" onClick={handleClick}>Start the Course!</button>}
-          {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course</button>}
-        </div>
-        
-          {course && courseDes(course.description)}
-        </div>
-        
-        {/* <img 
-          src="https://cdn.pixabay.com/photo/2016/11/29/09/14/walking-1868652_960_720.jpg"
-          width="25%"
-          alt="walk" /> */}
+    <div className="container mb-5">
+      <Logo />
+    <div className="container border border-info rounded p-3">
+      
+      <div className="row justify-content-end pr-3 pb-2">
+        {!isRegistered && <button type="submit" className="btn btn-danger" onClick={handleClick}>Start the Course!</button>}
+        {isRegistered && <button type="submit" className="btn btn-primary" onClick={handleContentRender}>Continue the Course</button>}
       </div>
+      <h4 className="text-center">{course && course.title}</h4>
+      <div className="p-5 text-justify">
+      {course && courseDes(course.description)}
+      </div>
+
       <SignupLoginModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} />
       <AdminModal modalIsOpen={adminModalShow} setModalIsOpen={setAdminModalShow} />
       {course && props.state.token &&
         <PaymentCourseModal
           modalIsOpen={paymentModalShow}
-          setModalIsOpen={setPaymentModalShow} 
-          price={course.price} 
+          setModalIsOpen={setPaymentModalShow}
+          price={course.price}
           registerUser={registerUser}
           userId={props.state.token.userId}
           courseId={courseId}
           setRedirectToContent={setRedirectToContent}
-          />}
+        />}
       {redirectToContent && <Redirect push to={`/courses/${courseId}/content`} />}
+    </div>
     </div>
   )
 };
