@@ -29,7 +29,7 @@ const PaymentModal = (props) => {
       overlayClassName="Overlay"
     >
       <div className="container">
-        <form onSubmit={handleForm} autoComplete="off">
+        <form onSubmit={handleForm} autoComplete="off" spellCheck="false">
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input id="name" className="form-control" type="text" name="name" value={state.name} onChange={handleChange} required/>
