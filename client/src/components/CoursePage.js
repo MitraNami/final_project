@@ -13,6 +13,12 @@ const CoursePage = (props) => {
   const { courseId } = useParams();
   //we need to get all the lessons with this course id from the database
   const { lessons } = useContentData(courseId);
+  //Some of the lessons may be set to be released in the future, filter those out
+  const currentLessons = lessons.filter(lesson => {
+    return new Date(lesson.release_date).getTime() <= new Date().getTime();
+  });
+
+
   //we need to get all the subscriptions for the given useId and courseId
   const {
     subscriptions,
@@ -32,7 +38,7 @@ const CoursePage = (props) => {
 
   if (!subscriptionBased) {
     //if the course is not subscription based then give the user access to all the lessons
-    LessonsList = lessons.map(lesson => <UserLesson key={lesson.id} lesson={lesson} access={true} />)
+    LessonsList = currentLessons.map(lesson => <UserLesson key={lesson.id} lesson={lesson} access={true} />)
   } else {
     //if the course is subscription based
     //we need to check if the user has an active subscription for it or not
@@ -42,7 +48,7 @@ const CoursePage = (props) => {
     // we need to give the user access only to the lessons in their subscription periods
     //Any lesson outside subscription periods must be locked with a 'buy now' button to
     //purchase the item
-    LessonsList = lessons.map(lesson => {
+    LessonsList = currentLessons.map(lesson => {
       const lessonReleaseDate = lesson.release_date;
       for (const subscription of subscriptions) {
         if (subscription.start_date < lessonReleaseDate &&
