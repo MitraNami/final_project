@@ -14,22 +14,19 @@ export default function LessonEdit() {
   const { lesson, setLesson, saveLesson } = useLessonData(lessonId, courseId);
 
   return (
-    <section className="lessonEdit">
-      <div className="container">
-        <div className="row">
-          <h4>
-            {lesson.id && 'Edit lesson'}
-            {!lesson.id && 'Add lesson'}
-          </h4>
-        </div>
+    <div className="container">
+      <h4>
+        {lesson.id && 'Edit lesson'}
+        {!lesson.id && 'Add lesson'}
+      </h4>
+      <section className="border border-dark p-3 my-3">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Name:
-            </label>
+          <div className="form-group">
+            <label htmlFor="title">Name:</label>
             <div className="input-group mb-3">
               <input className="form-control"
                 name="title"
+                id="title"
                 type="text"
                 value={lesson.title}
                 placeholder="Enter Name"
@@ -38,28 +35,23 @@ export default function LessonEdit() {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Description:
-            </label>
-            <div className="input-group mb-3">
-              <ReactQuill
-                theme="snow"
-                value={lesson.description}
-                modules={modules}
-                formats={formats}
-                onChange={handleDescriptionChange}
-              />
-            </div>
+          <div className="form-group">
+            <label>Description:</label>
+            <ReactQuill
+              theme="snow"
+              value={lesson.description}
+              modules={modules}
+              formats={formats}
+              onChange={handleDescriptionChange}
+            />
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Release date:
-            </label>
+          <div className="form-group">
+            <label htmlFor="release_date">Release date:</label>
             <div className="input-group mb-3">
               <input className="form-control"
                 name="release_date"
+                id="release_date"
                 type="datetime-local"
                 value={toLocalDatetime(new Date(lesson.release_date))}
                 placeholder="Enter date"
@@ -68,13 +60,12 @@ export default function LessonEdit() {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Video:
-            </label>
+          <div className="form-group">
+            <label htmlFor="video_url">Video:</label>
             <div className="input-group mb-3">
               <input className="form-control"
                 name="video_url"
+                id="video_url"
                 type="text"
                 value={lesson.video_url}
                 placeholder="Enter video URL"
@@ -83,13 +74,12 @@ export default function LessonEdit() {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Note:
-            </label>
+          <div className="form-group">
+            <label htmlFor="note_url">Note:</label>
             <div className="input-group mb-3">
               <input className="form-control"
                 name="note_url"
+                id="note_url"
                 type="text"
                 value={lesson.note_url}
                 placeholder="Enter note URL"
@@ -98,18 +88,17 @@ export default function LessonEdit() {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Price:
-            </label>
+          <div className="form-group">
+            <label htmlFor="price">Price:</label>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text">$</span>
               </div>
               <input className="form-control"
                 name="price"
+                id="price"
                 type="number"
-                value={lesson.price/100}
+                value={lesson.price / 100}
                 placeholder="Enter Price"
                 onChange={handleInputChange}
               />
@@ -118,18 +107,17 @@ export default function LessonEdit() {
               </div>
             </div>
           </div>
-
-          {!saving && (<button className="btn btn-primary" type="submit" onClick={save}>Save</button>)}
-          {!saving && (<button className="btn btn-primary" type="button" onClick={cancel}>Cancel</button>)}
-          {saving && (<span>Saving...</span>)}
         </form>
-      </div>
-    </section >
+      </section>
+      {!saving && (<button className="btn btn-secondary" type="submit" onClick={save}>Save</button>)}
+      {!saving && (<button className="btn btn-outline-secondary ml-2" type="button" onClick={cancel}>Cancel</button>)}
+      {saving && (<span>Saving...</span>)}
+    </div>
   );
 
   function handleInputChange(event) {
     const target = event.target;
-    if (target.name === 'price') target.value = parseInt(target.value)*100;
+    if (target.name === 'price') target.value = parseInt(target.value) * 100;
     setLesson(prev => ({
       ...prev,
       [target.name]: target.value

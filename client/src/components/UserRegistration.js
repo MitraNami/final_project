@@ -7,7 +7,7 @@ export default function UserRegistration(props) {
   const endDate = props.registration.end_date && new Date(props.registration.end_date);
 
   return (
-    <div className="row">
+    <div className="row py-1 mx-0 my-2 bg-light rounded">
       <div className="col">
         <Link to={`/admin/account/courses/${props.course.id}`}>{props.course.title}</Link>
       </div>
@@ -18,11 +18,9 @@ export default function UserRegistration(props) {
         {!endDate && '-'}
         {endDate && endDate.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
       </div>
-      <div className="col-1">
+      <div className="col-2 text-right">
         {!props.registration.end_date && (
-          <div className="col-1">
-            <button type="submit" className="btn btn-primary" onClick={complete}>Certify</button>
-          </div>
+          <button type="submit" className="btn btn-secondary" onClick={complete}>Certify</button>
         )}
       </div>
     </div>
