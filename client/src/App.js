@@ -47,7 +47,6 @@ function App() {
           </Route>
           <Route exact path='/courses/:courseId/content'> {/*make it a private route*/}
             <CoursePage state={state} />
-            <Footer />
           </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />

@@ -82,7 +82,7 @@ const CoursePage = (props) => {
   return (
     <div className="container">
 
-      <h4>{course && course.title}</h4>
+      <h1>{course && course.title}</h1>
 
       {/* we should see one of these buttons if the course is subscription based */}
       {subscriptionBased && <>
