@@ -21,7 +21,7 @@ const MyAccount = (props) => {
   const {path, url} = useRouteMatch();
 
   return(
-    <div>
+    <div className="mb-5">
       <div className="container">
         <Logo />
         <ul className="row bg-light" style={{listStyleType: 'none'}}>

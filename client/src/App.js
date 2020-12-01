@@ -17,6 +17,8 @@ import Contact from 'components/Contact';
 import Footer from 'components/Footer';
 import UserAdmin from 'components/UserAdmin';
 import UserAdminRegister from 'components/UserAdminRegister';
+import Logo from 'components/Logo';
+import PageNotFound from 'components/PageNotFound';
 
 function App() {
 
@@ -29,15 +31,19 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home />
+            <Footer />
           </Route>
           <Route exact path='/contact'>
             <Contact />
+            <Footer />
           </Route>
           <Route exact path='/courses'>
             <CoursesPage courses={state.courses} />
+            <Footer />
           </Route>
           <Route exact path='/courses/:courseId/home'>
             <CourseHomePage state={state} />
+            <Footer />
           </Route>
           <Route exact path='/courses/:courseId/content'> {/*make it a private route*/}
             <CoursePage state={state} />
@@ -72,8 +78,12 @@ function App() {
           <Route exact path='/admin/account/users/:userId'> {/*make it a private route*/}
             <UserAdmin state={state} />
           </Route>
+          <Route path="*">
+            <Logo />
+            <PageNotFound />
+            <Footer />
+          </Route>
         </Switch>
-        <Footer />
       </Router>
     </div>
   );

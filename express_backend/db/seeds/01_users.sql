@@ -1,8 +1,8 @@
 INSERT INTO
 users(first_name, last_name, email, password, type, avatar_url)
 VALUES
-    ('Mario', 'Bros', 'mario@nintendo.com', '$2b$10$8XpRtCvUSRqsyI3NsvlZZ.1aw21koHFGeGv3tvHru5xNB.hNLn4lK', 'admin', 'client/public/person-male.png'),
-    ('Luigi', 'Bros', 'luigi@nintendo.com', '$2b$10$8XpRtCvUSRqsyI3NsvlZZ.1aw21koHFGeGv3tvHru5xNB.hNLn4lK', 'client', 'client/public/person-male.png'),
+    ('Dean', 'Winchester', 'mario@nintendo.com', '$2b$10$8XpRtCvUSRqsyI3NsvlZZ.1aw21koHFGeGv3tvHru5xNB.hNLn4lK', 'admin', 'client/public/person-male.png'),
+    ('Katrina', 'Crane', 'KatrinvaV@gmail.com', '$2b$10$8XpRtCvUSRqsyI3NsvlZZ.1aw21koHFGeGv3tvHru5xNB.hNLn4lK', 'client', 'client/public/person-male.png'),
     (
         'Princess',
         'Peach',

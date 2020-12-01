@@ -31,7 +31,6 @@ const Signup = (props) => {
       .then(result => {
         if (result.data.msg === 'Sorry, a user account with this email already exists') {
           setState(prev => ({ ...prev, error: true, saving: false }));
-          //console.log('user with this email exists')
         } else {
           //login with this info'
           localStorage.setItem('token', JSON.stringify(result.data));

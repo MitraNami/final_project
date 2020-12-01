@@ -1,9 +1,19 @@
 import 'style/logo.css';
 
+import useWindowsHeight from 'hooks/useWindowsHeight';
+
 const Footer = () => {
 
+  const {viewHeight, documentHeight} = useWindowsHeight();
+
+  //If the document height is smaller than viewport height, place the footer
+  //at the end of the view port
+
+  const classname = documentHeight < viewHeight ? "fixed-bottom bg-dark mt-5" : "bg-dark mt-5";
+
   return (
-    <nav className="bg-dark mt-5">
+    <nav className={classname}>
+
       <div className="d-flex flex-row justify-content-between">
 
         <img src="https://res.cloudinary.com/dxc1pdflu/image/upload/v1606716109/social_media_tuxjvk.png" alt="social media" useMap="#social_media" />
