@@ -18,6 +18,7 @@ import Footer from 'components/Footer';
 import UserAdmin from 'components/UserAdmin';
 import UserAdminRegister from 'components/UserAdminRegister';
 import Logo from 'components/Logo';
+import PageNotFound from 'components/PageNotFound';
 
 function App() {
 
@@ -30,18 +31,23 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home />
+            <Footer />
           </Route>
           <Route exact path='/contact'>
             <Contact />
+            <Footer />
           </Route>
           <Route exact path='/courses'>
             <CoursesPage courses={state.courses} />
+            <Footer />
           </Route>
           <Route exact path='/courses/:courseId/home'>
             <CourseHomePage state={state} />
+            <Footer />
           </Route>
           <Route exact path='/courses/:courseId/content'> {/*make it a private route*/}
             <CoursePage state={state} />
+            <Footer />
           </Route>
           <Route path='/login'>
             <Login dispatch={dispatch} />
@@ -75,13 +81,10 @@ function App() {
           </Route>
           <Route path="*">
             <Logo />
-              <div className="container text-center">
-                <h1>Not Found</h1>
-                <p>Sorry, page not found!</p>
-              </div>
-        </Route>
+            <PageNotFound />
+            <Footer />
+          </Route>
         </Switch>
-        <Footer />
       </Router>
     </div>
   );
