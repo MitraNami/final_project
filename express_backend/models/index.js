@@ -1,7 +1,7 @@
 module.exports = (db, bcrypt) => {
   const getUsers = () => {
     const query = {
-      text: 'SELECT * FROM users',
+      text: 'SELECT * FROM users order by id',
     };
 
     return db
@@ -54,7 +54,7 @@ module.exports = (db, bcrypt) => {
 
   const getCourses = () => {
     const query = {
-      text: 'SELECT * FROM courses',
+      text: 'SELECT * FROM courses order by id',
     };
 
     return db
@@ -103,7 +103,7 @@ module.exports = (db, bcrypt) => {
 
   const getRegistrations = () => {
     const query = {
-      text: 'SELECT * FROM registrations'
+      text: 'SELECT * FROM registrations order by id'
     };
     return db
       .query(query)
@@ -138,7 +138,7 @@ module.exports = (db, bcrypt) => {
 
   const getLessonsByCourseId = courseId => {
     const query = {
-      text: `SELECT * FROM lessons WHERE course_id = $1`,
+      text: `SELECT * FROM lessons WHERE course_id = $1 order by id`,
       values: [courseId]
     }
 
