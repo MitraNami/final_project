@@ -10,12 +10,14 @@ export default function Course(props) {
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <div className="row">
-      <div className="col">
+    <div className="row mx-0 my-2 bg-light rounded">
+      <div className="col align-self-center">
         {props.title} {props.subscription_based ? '(subscription)' : ''}
       </div>
-      { props.admin && (<div className="col-1"><Link className="btn btn-primary" to={`${url}/courses/${props.id}`}>Edit</Link></div>)}
-      { props.admin && (<div className="col-1"><button type="submit" className="btn btn-primary" onClick={handleDeleteClick}>Delete</button></div>)}
+      <div className="col-3 align-self-center text-right">
+        <Link className="btn btn-secondary my-1" to={`${url}/courses/${props.id}`}>Edit</Link>
+        <button type="submit" className="btn btn-secondary my-1 ml-1" onClick={handleDeleteClick}>Delete</button>
+      </div>
       <ConfirmDeleteModal modalIsOpen={modalShow} setModalIsOpen={setModalShow} onDelete={delCourse} />
     </div>
   );

@@ -34,24 +34,53 @@ export default function UserAdminRegister(props) {
 
   return (<>
     { user &&
-      <section className="userAdminRegister">
-        <div className="container">
-          <div className="row">
-            <h4>Register user {user.first_name} {user.last_name}</h4>
+      <div className="container">
+        <h4>Manual User Registration</h4>
+        <form>
+          <div className="form-group row mb-0">
+            <label htmlFor="first_name" className="col-2 col-form-label">First name:</label>
+            <div className="col">
+              <input className="form-control-plaintext"
+                type="text"
+                id="first_name"
+                value={user.first_name}
+                readOnly
+              />
+            </div>
           </div>
-          <div className="row">
-            <h5>Select course:</h5>
+          <div className="form-group row mb-0">
+            <label htmlFor="last_name" className="col-2 col-form-label">Last name:</label>
+            <div className="col">
+              <input className="form-control-plaintext"
+                type="text"
+                id="last_name"
+                value={user.last_name}
+                readOnly
+              />
+            </div>
           </div>
+          <div className="form-group row">
+            <label htmlFor="email" className="col-2 col-form-label">Email:</label>
+            <div className="col">
+              <input className="form-control-plaintext"
+                type="text"
+                id="email"
+                value={user.email}
+                readOnly
+              />
+            </div>
+          </div>
+        </form>
+        <section className="border border-dark p-3 my-3">
+          <h5>Select course:</h5>
           <form autoComplete="off" onSubmit={event => event.preventDefault()}>
             {courseList}
           </form>
-          <div className="row">
-            {!saving && (<button className="btn btn-primary" type="submit" onClick={register} disabled={!course}>Register</button>)}
-            {!saving && (<button className="btn btn-primary" type="button" onClick={cancel}>Cancel</button>)}
-            {saving && (<span>Saving...</span>)}
-          </div>
-        </div>
-      </section>
+        </section>
+        {!saving && (<button className="btn btn-secondary" type="submit" onClick={register} disabled={!course}>Register</button>)}
+        {!saving && (<button className="btn btn-outline-secondary ml-2" type="button" onClick={cancel}>Cancel</button>)}
+        {saving && (<span>Saving...</span>)}
+      </div>
     }
   </>);
 

@@ -15,16 +15,16 @@ export default function UserRegistrationList(props) {
 
   return (<>
     {registrationList && (<>
-      {!registrationList.length && 'None'}
-      {registrationList.length > 0 && (<>
-        <div className="row">
-          <div className="col"><strong>Course</strong></div>
+      <div className="row">
+        {!registrationList.length && <div className="col my-3">None</div>}
+        {registrationList.length > 0 && (<>
+          <div className="col"></div>
           <div className="col-2"><strong>Started</strong></div>
           <div className="col-2"><strong>Completed</strong></div>
-          <div className="col-1"></div>
-        </div>
-        {registrationList}
-      </>)}
+          <div className="col-2"></div>
+        </>)}
+      </div>
+      {registrationList}
     </>)}
   </>);
 }
