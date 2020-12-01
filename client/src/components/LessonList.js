@@ -14,7 +14,6 @@ export default function LessonList(props) {
       note_url={lesson.note_url}
       price={lesson.price}
       course_id={lesson.course_id}
-      admin={props.admin}
       deleteLesson={props.deleteLesson}
     />);
 

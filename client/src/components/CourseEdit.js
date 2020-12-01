@@ -17,11 +17,12 @@ export default function CourseEdit(props) {
   const history = useHistory();
   const { courseId } = useParams();
   const [saving, setSaving] = useState(false);
-  const [course, setCourse] = useState(courseId
-    ? { ...getCourseById(courseId, props.state.courses) }
+  const courseObj = courseId && getCourseById(courseId, props.state.courses);
+  const [course, setCourse] = useState(courseId && courseObj
+    ? { ...courseObj }
     : {
       title: '',
-      description: '<html></html>',
+      description: '',
       price: '',
       subscription_based: false,
       authorized: false
@@ -32,56 +33,51 @@ export default function CourseEdit(props) {
 
   let registeredUserIds = new Set(registrations.filter(r => r.course_id === Number(courseId)).map(r => r.user_id));
 
+  if (courseId && courseObj && !course.id) {
+    setCourse({ ...courseObj });
+  }
+
+  console.log(lessons);
+
   return (
-    <section className="courseEdit">
-      <div className="container">
-        <div className="row">
-          <h4>
-            {course.id && 'Edit Course'}
-            {!course.id && 'Add Course'}
-          </h4>
-        </div>
+    <div className="container">
+      {course.id && <h4>Edit Course</h4>}
+      {!course.id && <h4>Add Course</h4>}
+      <section className="border border-dark p-3 my-3">
+        <h5>Course Info</h5>
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Course name:
-            </label>
-            <div className="input-group mb-3">
-              <input className="form-control"
-                name="title"
-                type="text"
-                value={course.title}
-                placeholder="Enter Name"
-                onChange={handleInputChange}
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="title">Course name:</label>
+            <input className="form-control"
+              name="title"
+              id="title"
+              type="text"
+              value={course.title}
+              placeholder="Enter Name"
+              onChange={handleInputChange}
+            />
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Description:
-            </label>
-            <div className="input-group mb-3">
-              <ReactQuill
-                theme="snow"
-                value={course.description}
-                modules={modules}
-                formats={formats}
-                onChange={handleDescriptionChange}
-              />
-            </div>
+          <div className="form-group">
+            <label>Description:</label>
+            <ReactQuill
+              theme="snow"
+              value={course.description}
+              modules={modules}
+              formats={formats}
+              onChange={handleDescriptionChange}
+            />
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="inputName" className="col-sm-2 col-form-label">
-              Price:
-              </label>
-            <div className="input-group mb-3">
+          <div className="form-group">
+            <label htmlFor="price">Price:</label>
+            <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text">$</span>
               </div>
               <input className="form-control"
                 name="price"
+                id="price"
                 type="number"
                 value={course.price / 100}
                 placeholder="Enter Price"
@@ -93,63 +89,56 @@ export default function CourseEdit(props) {
             </div>
           </div>
 
-          <div className="form-group row">
-            <div className="col-sm-10">
-              <div className="form-check">
-                <input className="form-check-input"
-                  name="subscription_based"
-                  type="checkbox"
-                  checked={course.subscription_based}
-                  onChange={handleInputChange}
-                  id="defaultCheck1"
-                />
-                <label className="form-check-label" htmlFor="defaultCheck1">
-                  Subscription
-                </label>
-              </div>
+          <div className="form-group">
+            <div className="form-check">
+              <input className="form-check-input"
+                name="subscription_based"
+                type="checkbox"
+                checked={course.subscription_based}
+                onChange={handleInputChange}
+                id="subscription_based"
+              />
+              <label className="form-check-label" htmlFor="subscription_based">Subscription</label>
             </div>
           </div>
 
-          <div className="form-group row">
-            <div className="col-sm-10">
-              <div className="form-check">
-                <input className="form-check-input"
-                  name="authorized"
-                  type="checkbox"
-                  checked={course.authorized}
-                  onChange={handleInputChange}
-                  id="defaultCheck2"
-                />
-                <label className="form-check-label" htmlFor="defaultCheck2">
-                  Authorized
-                </label>
-              </div>
+          <div className="form-group">
+            <div className="form-check">
+              <input className="form-check-input"
+                name="authorized"
+                type="checkbox"
+                checked={course.authorized}
+                onChange={handleInputChange}
+                id="authorized"
+              />
+              <label className="form-check-label" htmlFor="authorized">Authorized</label>
             </div>
           </div>
 
-          {!saving && (<button className="btn btn-primary" type="submit" onClick={save}>Save</button>)}
-          {!saving && (<button className="btn btn-primary" type="button" onClick={cancel}>Cancel</button>)}
+          {!saving && (<button className="btn btn-secondary" type="submit" onClick={save}>
+            {course.id && 'Save'}
+            {!course.id && 'Add'}
+          </button>)}
+          {!saving && !course.id && (<button className="btn btn-outline-secondary ml-2" type="button" onClick={cancel}>Cancel</button>)}
           {saving && (<span>Saving...</span>)}
         </form>
+      </section>
 
-        {courseId && (
-          <>
-            <div className="row">
-              <h4>Lessons</h4>
-            </div>
-            <LessonList lessons={lessons} deleteLesson={deleteLesson} admin={true} />
-            <div className="col">
-              <Link className="btn btn-primary" to={`${url}/lesson/new`}>Add lesson</Link>
-            </div>
+      {courseId && (<>
+        <section className="border border-dark p-3 my-3">
+          <h5>Course Lessons</h5>
+          <LessonList lessons={lessons} deleteLesson={deleteLesson} />
+          <Link className="btn btn-secondary mr-2" to={`${url}/lesson/new`}>Add Lesson</Link>
+        </section>
 
-            <div className="row">
-              <h4>Registered Users</h4>
-            </div>
-            <UserList users={props.state.users.filter(u => registeredUserIds.has(u.id))}/>
-          </>
-        )}
-      </div>
-    </section >
+        <section className="border border-dark p-3 my-3">
+          <h5>Registered Users</h5>
+          <UserList users={props.state.users.filter(u => registeredUserIds.has(u.id))} />
+        </section>
+
+        <button className="btn btn-outline-secondary mr-2" type="button" onClick={cancel}>Cancel</button>
+      </>)}
+    </div>
   );
 
   function handleInputChange(event) {

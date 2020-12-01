@@ -8,26 +8,17 @@ export default function Admin(props) {
   const { url } = useRouteMatch();
 
   return (
-    <section className="admin">
-      <section className="courseAdmin">
-        <div className="container">
-          <div className="row">
-            <h4>Courses</h4>
-          </div>
-          <CourseList courses={props.state.courses} dispatch={props.dispatch} admin={true} />
-          <div className="row">
-            <Link className="btn btn-primary" to={`${url}/courses/new`}>Add course</Link>
-          </div>
-        </div>
+    <div className="container">
+      <h4>Admin Account</h4>
+      <section className="border border-dark p-3 my-3">
+        <h5>Courses</h5>
+        <CourseList courses={props.state.courses} dispatch={props.dispatch} />
+        <Link className="btn btn-secondary mr-2" to={`${url}/courses/new`}>Add Course</Link>
       </section>
-      <section className="userAdmin">
-        <div className="container">
-          <div className="row">
-            <h4>Users</h4>
-          </div>
-          <UserList users={props.state.users} />
-        </div>
+      <section className="border border-dark p-3 my-3">
+        <h5>Users</h5>
+        <UserList users={props.state.users} />
       </section>
-    </section >
+    </div>
   );
 };

@@ -23,7 +23,7 @@ const Footer = () => {
           <area target="_blank" alt="instagram" href="https://www.instagram.com/" coords="148,28,19" shape="circle" />
         </map>
 
-        <span className="text-light align-self-center pr-3">StongorU Inc.</span>
+        <span className="text-light align-self-center pr-3">StrongerU Inc.</span>
       </div>
     </nav>
   );

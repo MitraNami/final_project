@@ -10,7 +10,6 @@ export default function CourseList(props) {
       title={course.title}
       description={course.description}
       subscription_based={course.subscription_based}
-      admin={props.admin}
       dispatch={props.dispatch}
     />);
 

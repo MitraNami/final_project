@@ -15,37 +15,54 @@ export default function UserAdmin(props) {
 
   return (<>
     { user &&
-      <section className="userAdmin">
-        <div className="container">
-          <div className="row">
-            <h4>User {user.first_name} {user.last_name}</h4>
-          </div>
-          <div className="row">
-            <div className="col">
-              First Name: {user.first_name}
+      <div className="container">
+        <h4>User Account</h4>
+        <section className="border border-dark p-3 my-3">
+          <h5>Account Information</h5>
+          <form>
+            <div className="form-group row mb-0">
+              <label htmlFor="first_name" className="col-2 col-form-label">First name:</label>
+              <div className="col">
+                <input className="form-control-plaintext"
+                  type="text"
+                  id="first_name"
+                  value={user.first_name}
+                  readOnly
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              Last Name: {user.last_name}
+            <div className="form-group row mb-0">
+              <label htmlFor="last_name" className="col-2 col-form-label">Last name:</label>
+              <div className="col">
+                <input className="form-control-plaintext"
+                  type="text"
+                  id="last_name"
+                  value={user.last_name}
+                  readOnly
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              Email: {user.email}
+            <div className="form-group row">
+              <label htmlFor="email" className="col-2 col-form-label">Email:</label>
+              <div className="col">
+                <input className="form-control-plaintext"
+                  type="text"
+                  id="email"
+                  value={user.email}
+                  readOnly
+                />
+              </div>
             </div>
-          </div>
-          {userRegistrations && (<>
-            <div className="row">
-              <h5>Course Registrations</h5>
-            </div>
+          </form>
+        </section>
+        {userRegistrations && (<>
+          <section className="border border-dark p-3 my-3">
+            <h5>Course Registrations</h5>
             <UserRegistrationList state={props.state} registrations={userRegistrations} updateRegistration={updateRegistration} />
-            <div className="row">
-              <Link className="btn btn-primary" to={`${url}/register`}>Add registration</Link>
-            </div>
-          </>)}
-        </div>
-      </section>
+            <Link className="btn btn-secondary mr-2" to={`${url}/register`}>Add Registration</Link>
+          </section>
+        </>)}
+      </div>
     }
   </>);
 }
