@@ -1,6 +1,8 @@
 # StrongerU Project
 
-StrongerU is built with Create React App. It allows a student to book and manage an interview with a mentor.
+StrongerU is built with Create React App on the frontend and Express and PostgreSQL on the backend.  
+The Admin can create fitness courses and add/edit/delete their contents. They have access to lists of users registered in each course and can manually register students in courses.  
+The user can register in fitness courses and subscribe to fitness series to receive new releases. They can cancel their subscription at any time.
 
 ## Getting Started
 
@@ -28,9 +30,9 @@ StrongerU is built with Create React App. It allows a student to book and manage
 ## Final Product
 
 
-!["Booking an interview appointment"](https://github.com/MitraNami/scheduler/blob/master/docs/book_interview.png?raw=true)
+!["HomePage"](https://github.com/MitraNami/final_project/blob/main/docs/homepage.png?raw=true)
 
-!["Schedule of Wednesday"](https://github.com/MitraNami/scheduler/blob/master/docs/wed_schedule.png?raw=true)
+!["Courses"](https://github.com/MitraNami/final_project/blob/main/docs/courses.png?raw=true)
 
-!["Deleting an interview appointment"](https://github.com/MitraNami/scheduler/blob/master/docs/delete_interview.png?raw=true)
+!["Course"](https://github.com/MitraNami/final_project/blob/main/docs/course.png?raw=true)
 

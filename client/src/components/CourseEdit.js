@@ -37,8 +37,6 @@ export default function CourseEdit(props) {
     setCourse({ ...courseObj });
   }
 
-  console.log(lessons);
-
   return (
     <div className="container">
       {course.id && <h4>Edit Course</h4>}
