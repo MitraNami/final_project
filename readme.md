@@ -24,6 +24,7 @@ The user can register in fitness courses and subscribe to fitness series to rece
 * bcrypt
 * cors
 * nodemailer
+* JWT
 * postgreSQL
 
 
